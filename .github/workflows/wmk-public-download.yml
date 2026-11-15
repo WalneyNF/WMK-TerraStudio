@@ -1,0 +1,59 @@
+name: WMK - Publicar ZIPs para download
+on:
+  workflow_dispatch:
+  push:
+    branches: [wmk/virtual-journey-mvp]
+    paths:
+      - '.github/workflows/wmk-public-download.yml'
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obter codigo
+        uses: actions/checkout@v4
+      - name: Criar pacotes individuais dos modulos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist/modules
+          mkdir -p dist/bundles/WMK-Planet-Watch
+          mkdir -p dist/bundles/WMK-Virtual-Journey
+          cp -a modulos/planet-watch/. dist/bundles/WMK-Planet-Watch/
+          cp -a modulos/virtual-journey/. dist/bundles/WMK-Virtual-Journey/
+          (cd dist/bundles && zip -q -r ../modules/WMK-Planet-Watch-v0.1.zip WMK-Planet-Watch)
+          (cd dist/bundles && zip -q -r ../modules/WMK-Virtual-Journey-v0.1.zip WMK-Virtual-Journey)
+          unzip -t dist/modules/WMK-Planet-Watch-v0.1.zip
+          unzip -t dist/modules/WMK-Virtual-Journey-v0.1.zip
+      - name: Baixar executavel Windows anteriormente compilado e aprovado
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Artefato do build concluido com sucesso em 2026-11-15.
+          # SHA do commit realmente compilado: e15703d025ea3de69e9b5ae6b28bfc2230390731.
+          gh api repos/${{ github.repository }}/actions/artifacts/14150578532/zip > dist/compiled-artifact.zip
+          unzip -q dist/compiled-artifact.zip -d dist/unpacked
+          test -f dist/unpacked/WMK-TerraStudio-Windows-x64.zip
+          unzip -t dist/unpacked/WMK-TerraStudio-Windows-x64.zip
+          cp dist/unpacked/WMK-TerraStudio-Windows-x64.zip dist/modules/WMK-TerraStudio-Windows-x64-PREVIEW.zip
+          (cd dist/modules && sha256sum *.zip > SHA256SUMS.txt)
+      - name: Publicar Release publico
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="wmk-v0.1.0-preview-20261115"
+          TITLE="WMK TerraStudio - PREVIA Windows e modulos"
+          printf '%s\n'             '# WMK TerraStudio - download publico de teste'             ''             'Pacotes separados para Windows. **PREVIA**, sem homologacao de abertura na maquina do usuario.'             ''             '- WMK-TerraStudio-Windows-x64-PREVIEW.zip: executaveis rustgis.exe e rustgis-cli.exe compilados e testados no GitHub Actions (commit e15703d). **Ainda sem a logo WMK final e sem renomeacao do EXE**.'             '- WMK-Planet-Watch-v0.1.zip: PHP 8/XAMPP + Python 3; execute INICIAR.cmd.'             '- WMK-Virtual-Journey-v0.1.zip: PHP 8/XAMPP; execute INICIAR.cmd. Globo precisa de internet/WebGL; consultas ADS-B limitadas.'             '- SHA256SUMS.txt: verificacao dos tres arquivos.'             ''             'IMPORTANTE: nao desative antivírus, Chrome Safe Browsing nem Windows SmartScreen. Veja a origem e hashes antes de executar.'             ''             'Creditos WMK: Walney Moreira Klein - walneyk@hotmail.com. Base original RustGIS/opengeos (Apache-2.0).'             > dist/RELEASE-NOTES.md
+          gh release create "$TAG" dist/modules/*.zip dist/modules/SHA256SUMS.txt \
+            --repo "${{ github.repository }}" \
+            --target e15703d025ea3de69e9b5ae6b28bfc2230390731 \
+            --title "$TITLE" \
+            --notes-file dist/RELEASE-NOTES.md \
+            --prerelease

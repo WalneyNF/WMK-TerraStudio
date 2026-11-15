@@ -119,6 +119,13 @@
           "state": "implemented",
           "evidence": ".github/workflows/wmk-windows.yml; assets/wmk-terrastudio-icon.png",
           "note": "Aguardando resultado da nova compilação"
+        },
+        {
+          "id": "WIN-06",
+          "name": "Publicar prévia pública do executável já compilado e módulos ZIP individuais em GitHub Releases",
+          "state": "implemented",
+          "evidence": ".github/workflows/wmk-public-download.yml",
+          "note": "O Release ainda depende da execução e validação do workflow; o pacote EXE desta prévia é anterior à logo oficial"
         }
       ]
     },

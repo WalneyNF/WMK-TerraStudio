@@ -15,6 +15,22 @@
 
 > **Origem e atribuições:** O WMK TerraStudio é um fork independente de [RustGIS, do projeto opengeos](https://github.com/opengeos/RustGIS). Toda a base original permanece creditada aos respectivos autores e colaboradores, sob a licença **Apache-2.0**. A identidade WMK e a documentação em português são personalizações do fork. Este projeto **não é uma distribuição oficial** do RustGIS. Consulte [LICENSE](LICENSE), [ATTRIBUTION.md](ATTRIBUTION.md), [THIRD-PARTY-LICENSES.txt](THIRD-PARTY-LICENSES.txt) e [NOTICE de atribuições WMK](manuais/ATRIBUICOES.md).
 
+## ⬇️ Download público — Windows e módulos WMK
+
+**[Acessar os ZIPs públicos no GitHub Releases](https://github.com/WalneyNF/WMK-TerraStudio/releases/tag/wmk-v0.1.0-preview-20261115)**.
+
+Pacotes de prévia separados, acessíveis sem a página de artefatos do GitHub Actions:
+
+| Arquivo | Requisitos | Como começar |
+| --- | --- | --- |
+| `WMK-TerraStudio-Windows-x64-PREVIEW.zip` | Windows 64 bits | Extrair e executar `rustgis.exe` |
+| `WMK-Planet-Watch-v0.1.zip` | PHP 8/XAMPP + Python 3 | Extrair, executar `INICIAR.cmd` |
+| `WMK-Virtual-Journey-v0.1.zip` | PHP 8/XAMPP + navegador WebGL | Extrair, executar `INICIAR.cmd` |
+
+A versão compilada publicada nesta prévia é **anterior à incorporação do ícone WMK oficial**; não confundir com a compilação mais recente, ainda em validação. Os ZIPs incluem `SHA256SUMS.txt` para conferência. A execução em Windows deve ser testada com o antivírus ativo.
+
+O workflow [Publicar ZIPs para download](.github/workflows/wmk-public-download.yml) empacota novamente os módulos e publica os arquivos como ativos de uma Release.
+
 ## Apresentação
 
 O WMK TerraStudio é uma proposta de ambiente profissional para **mapas, SIG (Sistema de Informações Geográficas), análise espacial, imagens de satélite e dados de localização**, construída sobre a base tecnológica do RustGIS. O motor original já oferece aplicativos desktop e web, biblioteca Python, linha de comando, integração por MCP e plugins.
