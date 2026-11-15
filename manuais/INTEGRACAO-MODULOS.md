@@ -55,3 +55,8 @@ py -3 -m http.server 8790
 Em seguida: http://127.0.0.1:8790/roadmap.html
 
 **Créditos WMK:** Walney Moreira Klein — walneyk@hotmail.com. **Projeto base:** RustGIS / opengeos e colaboradores, Apache-2.0.
+
+
+## Primeiro adaptador funcional
+
+O script [exportar_geojson.py](../modulos/planet-watch/exportar_geojson.py) consome GeoJSON público do Planet Watch e o grava para importação no TerraStudio. Consulte [o passo a passo](../modulos/planet-watch/INTEGRACAO-TERRASTUDIO.md). Testes automatizados cobrem o formato, mas a interação visual ainda requer validação no Windows.
