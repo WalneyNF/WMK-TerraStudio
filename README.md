@@ -97,6 +97,16 @@ Acesse **http://127.0.0.1:8788**. Veja o [catálogo de módulos WMK](modulos/cat
 
 **Código-base e atribuições:** RustGIS / opengeos e seus colaboradores. **Personalização WMK:** Walney Moreira Klein — walneyk@hotmail.com.
 
+## Acompanhamento do projeto e integração dos sistemas
+
+O **[roadmap.html](roadmap.html)** lê o **[roadmap.json](roadmap.json)** e apresenta módulos, tarefas, dependências, progresso e estado de validação. Para abri-lo localmente, execute na raiz `py -3 -m http.server 8790` e visite `http://127.0.0.1:8790/roadmap.html`.
+
+A arquitetura de integração está documentada em **[manuais/INTEGRACAO-MODULOS.md](manuais/INTEGRACAO-MODULOS.md)**, com endereços de serviços, contratos GeoJSON, MCP e restrições de segurança.
+
+**Compilação Windows x64:** workflow manual [WMK TerraStudio — Windows](.github/workflows/wmk-windows.yml), que testa pt-BR e gera ZIP portátil quando concluído com sucesso. O executável interno ainda é `rustgis.exe` por compatibilidade com a base.
+
+**Atenção:** o PNG da logo aprovada nesta conversa ainda precisa ser adicionado como arquivo binário ao repositório; o ícone nativo em Rust contém somente adaptação provisória da paleta. Não foi substituído pela arte original.
+
 ## Evolução do WMK TerraStudio
 
 1. **Etapa 1 — documentação e identidade no GitHub:** README pt-BR, marca visual e estrutura de manuais.

@@ -47,13 +47,13 @@ BEGIN
   BEGIN
     BLOCK "040904B0"
     BEGIN
-      VALUE "CompanyName", "The RustGIS contributors"
-      VALUE "FileDescription", "RustGIS"
+      VALUE "CompanyName", "WMK / RustGIS contributors"
+      VALUE "FileDescription", "WMK TerraStudio - GIS"
       VALUE "FileVersion", "{version}"
       VALUE "InternalName", "rustgis"
-      VALUE "LegalCopyright", "Copyright the RustGIS contributors. Apache-2.0."
+      VALUE "LegalCopyright", "RustGIS contributors (Apache-2.0); WMK: Walney Moreira Klein."
       VALUE "OriginalFilename", "rustgis.exe"
-      VALUE "ProductName", "RustGIS"
+      VALUE "ProductName", "WMK TerraStudio"
       VALUE "ProductVersion", "{version}"
     END
   END
