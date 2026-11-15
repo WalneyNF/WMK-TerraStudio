@@ -42,6 +42,13 @@ jobs:
           unzip -t dist/unpacked/WMK-TerraStudio-Windows-x64.zip
           cp dist/unpacked/WMK-TerraStudio-Windows-x64.zip dist/modules/WMK-TerraStudio-Windows-x64-PREVIEW.zip
           (cd dist/modules && sha256sum *.zip > SHA256SUMS.txt)
+      - name: Guardar pacotes como artefatos mesmo quando Releases estiver indisponivel
+        uses: actions/upload-artifact@v4
+        with:
+          name: WMK-Pacotes-Downloads
+          path: dist/modules/*
+          if-no-files-found: error
+          retention-days: 30
       - name: Publicar Release publico
         env:
           GH_TOKEN: ${{ github.token }}
