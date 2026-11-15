@@ -286,7 +286,7 @@ pub fn lang_from_tag(tag: &str) -> Option<Lang> {
     // `Hans` script asks for Simplified (`zh-Hans-TW`). Hong Kong and Macau have no catalog of
     // their own: they fall back to English whatever the script (`zh-Hans-HK` too), as before.
     if primary == "zh" {
-        let rest: Vec<&str> = parts.collect();
+        let rest: Vec<&str> = parts.clone().collect();
         if rest.iter().any(|p| matches!(*p, "hk" | "mo")) {
             return None;
         }
