@@ -169,7 +169,17 @@ async function searchFlights(){
  try{
    const url="./api/flights.php?lat="+encodeURIComponent(loc.lat)+"&lon="+encodeURIComponent(loc.lon);
    const response=await fetch(url,{cache:"no-store"});const data=await response.json();
-   if(!response.ok)throw new Error(data.error||("HTTP "+response.status));
+   if(!response.ok){
+     const message=data.message||data.error||("HTTP "+response.status);
+     const seconds=Number(data.retryAfterSeconds);
+     throw new Error(message+(Number.isFinite(seconds)&&seconds>0?" · Tente novamente em "+Math.ceil(seconds)+" s.":""));
+   }
+   if(data.cooldown){
+     foundFlights=[];
+     renderFlights();
+     msg.textContent=data.message+"\nUse o botão de demonstração enquanto aguarda.";
+     return;
+   }
    foundFlights=Array.isArray(data.aircraft)?data.aircraft:[];
    msg.textContent=foundFlights.length+" aeronaves com posição recente · "+data.source+
     (data.stale?" · CACHE ANTIGO":data.cached?" · CACHE":" · BUSCA NOVA")+
@@ -183,7 +193,7 @@ function follow(a){
  playing=false;
  const model=modelFor(a.typeCode);
  if(model){el("model").value=model;applyModel()}else reset();
- live=true;selectedFlight=a;lastLivePositionAt=Date.now();
+ live=!a.demo;selectedFlight=a.demo?null:a;lastLivePositionAt=Date.now();
  flight={lat:a.latitude,lon:a.longitude,alt:Math.max(0,a.altitudeM??1000),
  speed:Math.max(0,a.groundSpeedKmh??0),heading:normalizeHeading(a.headingDeg??0),travelKm:0};
  locations=[position()];createEntity();updateEntity();updateCamera();
@@ -191,13 +201,25 @@ function follow(a){
  el("altValue").textContent=Math.round(flight.alt)+" m";
  el("headingValue").textContent=Math.round(flight.heading)+"°";
  el("extraValue").textContent="N/D";
- el("flightMessage").textContent="Acompanhando "+(a.callsign||a.icao24)+
+ el("flightMessage").textContent=(a.demo?"SIMULAÇÃO LOCAL · ":"ÚLTIMA POSIÇÃO ADS-B · ")+(a.callsign||a.icao24)+
  (model?" · painel didático "+AIRCRAFT[model].name:" · modelo não confirmado: painel genérico")+
- "\nÚltima observação: "+new Date(a.lastSeenEpoch*1000).toLocaleString("pt-BR")+
- "\nContinuar passeio: projeção visual por até 20 s.";
- instruments();renderFlights();status("Selecionada aeronave ADS-B · última posição observada");
+ (a.demo?"\nEstes aviões são fictícios, criados somente para testar o módulo.":"\nÚltima observação: "+new Date(a.lastSeenEpoch*1000).toLocaleString("pt-BR")+"\nContinuar passeio: projeção visual por até 20 s.");
+ instruments();renderFlights();status(a.demo?"Aeronave fictícia · modo de demonstração":"Aeronave ADS-B · última posição observada");
 }
 el("searchFlights").addEventListener("click",searchFlights);
 el("filterFlights").addEventListener("input",renderFlights);
 el("returnDemo").addEventListener("click",()=>{applyModel();el("flightMessage").textContent="Passeio demonstrativo restaurado.";renderFlights()});
 el("togglePanel").addEventListener("click",()=>{document.body.classList.toggle("compact-cockpit");el("togglePanel").setAttribute("aria-pressed",String(document.body.classList.contains("compact-cockpit")))});
+
+async function sampleFlights(){
+ const msg=el("flightMessage");
+ try{
+   const r=await fetch("./api/demo.php?region="+encodeURIComponent(el("location").value),{cache:"no-store"});
+   if(!r.ok)throw new Error("HTTP "+r.status);
+   const data=await r.json();
+   foundFlights=(data.aircraft||[]).map(a=>({...a,demo:true}));
+   msg.textContent="DEMONSTRAÇÃO · 4 aeronaves FICTÍCIAS. Sem consultar ADS-B.lol. Selecione uma para entrar no cockpit.";
+   renderFlights();
+ }catch(e){msg.textContent="Falha ao carregar exemplos: "+e.message}
+}
+el("sampleFlights").addEventListener("click",sampleFlights);

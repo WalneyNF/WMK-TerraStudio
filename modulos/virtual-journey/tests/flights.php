@@ -15,3 +15,5 @@ check($list[0]['lastSeenEpoch']===1794709995,'Timestamp');
 check(wmk_validate_center(['lat'=>'-22.28','lon'=>'-42.53'])!==null,'Coordenadas');
 check(wmk_validate_center(['lat'=>'-91','lon'=>'0'])===null,'Bloquear coordenadas inválidas');
 echo "OK: normalização, conversões, filtros e coordenadas\n";
+
+check(is_file(dirname(__DIR__).'/api/demo.php'),'Endpoint de demonstracao disponivel');

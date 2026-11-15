@@ -23,6 +23,7 @@ jobs:
         run: |
           php -l api/flights_lib.php
           php -l api/flights.php
+          php -l api/demo.php
           php tests/flights.php
       - name: Testar física demonstrativa e biblioteca de modelos
         working-directory: modulos/virtual-journey

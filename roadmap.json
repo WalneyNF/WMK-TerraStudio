@@ -327,6 +327,13 @@
           "name": "Painel compacto para melhor visualização da viagem",
           "state": "implemented",
           "evidence": "modulos/virtual-journey/style.css"
+        },
+        {
+          "id": "VJ-12",
+          "name": "Corrigir erro 429 local com aviso de espera e oferecer aeronaves fictícias para testes",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/api/flights.php; modulos/virtual-journey/api/demo.php; modulos/virtual-journey/app.js",
+          "note": "Aguardar CI; consulta real ainda depende da cota e cobertura do provedor"
         }
       ]
     }

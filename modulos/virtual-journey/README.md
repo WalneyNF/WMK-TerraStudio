@@ -2,6 +2,14 @@
 
 **Primeira versão demonstrativa independente**, criada para acompanhar a suíte WMK TerraStudio. Não é ainda uma experiência fotorrealista ou um simulador com física aeronáutica.
 
+## Erro 429 e teste independente
+
+O conector aplica um intervalo global entre chamadas externas para preservar a cota do ADS-B.lol. Se pesquisar várias regiões consecutivamente, o programa informa o tempo de espera em português, em vez de exibir somente um erro 429 sem explicação. Esse limite é **local**, definido pelo WMK. O provedor também pode responder HTTP 429 independentemente; quando isso acontecer, o programa explica que a limitação vem do provedor.
+
+Para **testar mesmo sem API**, clique em **"Testar com 4 aeronaves simuladas"**. Os quatro exemplos fictícios A320, B738, C172 e H125 aparecem na lista e podem ser selecionados no cockpit. Eles são explicitamente rotulados como DEMONSTRAÇÃO, sem fingir que são voos reais.
+
+O cache do PHP fica na pasta temporária do sistema, separado do repositório, e pode continuar ativo após fechar o servidor. Reiniciar o PHP não elimina necessariamente o intervalo de proteção.
+
 ## Consultar aeronaves reais (ADSB.lol)
 
 Inicie com **`INICIAR.cmd`** (requer PHP/XAMPP). Escolha uma região, clique em **Buscar aeronaves** e selecione um voo da lista. O servidor consulta a [API ADS-B.lol](https://www.adsb.lol/docs/open-data/api) num raio de 100 milhas náuticas. Dados disponíveis: identificação, matrícula, tipo ICAO (quando informado), latitude, longitude, altitude, velocidade sobre o solo e rumo.

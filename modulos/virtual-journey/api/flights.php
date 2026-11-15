@@ -24,10 +24,25 @@ $stampFile=$dir.DIRECTORY_SEPARATOR.'rate.json';
 $rate=is_file($stampFile)?json_decode((string)@file_get_contents($stampFile),true):[];
 $today=gmdate('Y-m-d');
 if(!is_array($rate)||($rate['date']??'')!==$today)$rate=['date'=>$today,'count'=>0,'last'=>0];
-if($rate['count']>=430||$now-(int)$rate['last']<180){
+$dailyLimitReached = $rate['count']>=430;
+$cooldownSeconds = max(0,180-($now-(int)$rate['last']));
+if($dailyLimitReached||$cooldownSeconds>0){
  flock($lock,LOCK_UN);fclose($lock);
- if(is_array($existing)){$existing['cached']=true;$existing['stale']=true;result(200,$existing);}
- result(429,['error'=>'quota_guard','retryAfterSeconds'=>max(0,180-($now-(int)$rate['last']))]);
+ if(is_array($existing)){
+   $existing['cached']=true;$existing['stale']=true;
+   $existing['retryAfterSeconds']=$dailyLimitReached?null:$cooldownSeconds;
+   result(200,$existing);
+ }
+ $retry=$dailyLimitReached?null:$cooldownSeconds;
+ // Uma consulta negada por nossa política não deve parecer falha inesperada do PHP.
+ result(200,['source'=>'WMK Flight Radar','dataKind'=>'no_current_positions',
+   'aircraft'=>[],'stale'=>false,'cached'=>false,'cooldown'=>true,
+   'error'=>$dailyLimitReached?'daily_limit':'local_cooldown',
+   'retryAfterSeconds'=>$retry,
+   'message'=>$dailyLimitReached
+       ?'Limite de proteção diário atingido. Tente amanhã.'
+       :'Proteção da API: aguarde '.(string)$retry.' segundos antes de buscar outra região.',
+   'fetchedAtEpoch'=>$now]);
 }
 $rate['count']++;$rate['last']=$now;
 file_put_contents($stampFile,json_encode($rate),LOCK_EX);
@@ -39,8 +54,16 @@ $headers=$http_response_header??[];
 $status=0;foreach($headers as $line){if(preg_match('~^HTTP/\S+\s+(\d{3})~',$line,$m))$status=(int)$m[1];}
 if($raw===false||strlen($raw)>2000000||$status!==200){
  flock($lock,LOCK_UN);fclose($lock);
- if(is_array($existing)){$existing['stale']=true;$existing['cached']=true;result(200,$existing);}
- result(502,['error'=>'upstream_unavailable','upstreamStatus'=>$status]);
+ if(is_array($existing)){
+   $existing['stale']=true;$existing['cached']=true;
+   $existing['providerError']=$status===429?'provider_rate_limited':'upstream_unavailable';
+   result(200,$existing);
+ }
+ result($status===429?429:502,['error'=>$status===429?'provider_rate_limited':'upstream_unavailable',
+   'upstreamStatus'=>$status,'retryAfterSeconds'=>$status===429?180:null,
+   'message'=>$status===429
+       ?'O provedor ADS-B.lol limitou as consultas. Aguarde antes de tentar novamente.'
+       :'Não foi possível consultar o provedor. Verifique a conexão ou teste aeronaves de demonstração.']);
 }
 $upstream=json_decode($raw,true);
 if(!is_array($upstream)||!isset($upstream['ac'])||!is_array($upstream['ac'])){
