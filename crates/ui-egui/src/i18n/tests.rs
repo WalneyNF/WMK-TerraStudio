@@ -29,7 +29,9 @@ fn lookup_fallback_and_tags() {
     assert_eq!(tr(Lang::EN, "Explore"), "Explore");
     assert_eq!(tr(Lang::EN, "no such string"), "no such string");
     assert_eq!(lang_from_tag("de_DE.UTF-8").map(Lang::code), Some("de"));
-    assert_eq!(lang_from_tag("pt-BR").map(Lang::code), Some("pt"));
+    assert_eq!(lang_from_tag("pt-BR").map(Lang::code), Some("pt-br"));
+    assert_eq!(lang_from_tag("pt_BR.UTF-8").map(Lang::code), Some("pt-br"));
+    assert_eq!(lang_from_tag("pt-PT").map(Lang::code), Some("pt"));
     assert_eq!(lang_from_tag("bn-BD").map(Lang::code), Some("bn"));
     assert_eq!(lang_from_tag("pl_PL.UTF-8").map(Lang::code), Some("pl"));
     assert_eq!(lang_from_tag("el_GR.UTF-8").map(Lang::code), Some("el"));
@@ -65,6 +67,16 @@ fn fmt_raw_keeps_logical_order() {
     assert_eq!(fmt("{reason}", &args), rtl::visual("سلام abc"));
     assert_ne!(fmt("{reason}", &args), fmt_raw("{reason}", &args));
     assert_eq!(fmt_raw("{reason} {", &args), "سلام abc {");
+}
+
+#[test]
+fn brazilian_portuguese_registration_and_fallback() {
+    let br = Lang::from_code("pt-br").unwrap_or(Lang::EN);
+    assert_eq!(br.name(), "Português (Brasil)");
+    assert_eq!(br.english(), "Portuguese (Brazil)");
+    assert_eq!(br.script(), Script::Alphabetic);
+    assert_eq!(tr(br, "Open"), "Abrir");
+    assert_eq!(tr(br, "A string not in the Brazilian catalog"), "A string not in the Brazilian catalog");
 }
 
 #[test]
