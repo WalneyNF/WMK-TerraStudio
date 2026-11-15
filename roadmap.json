@@ -314,6 +314,19 @@
           "state": "implemented",
           "evidence": "modulos/virtual-journey/INICIAR.cmd",
           "note": "Execução em Windows com XAMPP ainda depende de teste manual"
+        },
+        {
+          "id": "VJ-10",
+          "name": "Consulta regional de aeronaves ADS-B.lol e acompanhamento por posição reportada",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/api/flights.php; modulos/virtual-journey/app.js",
+          "note": "Busca manual com cache e controle de cotas; projeção limitada a 20 segundos; teste visual pendente"
+        },
+        {
+          "id": "VJ-11",
+          "name": "Painel compacto para melhor visualização da viagem",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/style.css"
         }
       ]
     }

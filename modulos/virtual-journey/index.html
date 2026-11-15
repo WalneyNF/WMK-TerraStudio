@@ -13,9 +13,14 @@
 <select id="model"><option value="a320">Airbus A320 · jato comercial</option><option value="b738">Boeing 737-800 · jato comercial</option><option value="c172">Cessna 172 · monomotor</option><option value="h125">Airbus H125 · helicóptero</option></select>
 <label for="location">Região da viagem</label><select id="location"><option value="friburgo">Nova Friburgo · RJ</option><option value="rio">Rio de Janeiro · RJ</option><option value="alpes">Alpes · Suíça</option><option value="nyc">Nova York · EUA</option></select>
 <div class="controls"><button id="start" class="main">▶ Iniciar passeio</button><button id="pause">⏸ Pausar</button><button id="reset">↺ Reiniciar</button></div>
-<h2>Perspectiva</h2>
+<section class="radar-search"><h2>✈ Aviões reais (teste)</h2>
+<p>Busque aeronaves próximas à região selecionada. Selecione uma para acompanhar a posição recebida.</p>
+<button id="searchFlights">🔎 Buscar aeronaves</button><label for="filterFlights">Filtrar voos</label>
+<input id="filterFlights" placeholder="Código, matrícula, modelo">
+<div id="flightMessage" role="status">Nenhuma consulta realizada.</div><div id="flightsList" class="flight-list"></div>
+<button id="returnDemo">↺ Voltar à demonstração</button></section><h2>Perspectiva</h2>
 <div class="cameras"><button data-camera="cockpit" class="active">1 · Cockpit</button><button data-camera="chase">2 · Atrás</button><button data-camera="wing">3 · Lateral</button><button data-camera="top">4 · Superior</button><button data-camera="free">5 · Livre</button></div>
-<h2>Parâmetros da demonstração</h2>
+<button id="togglePanel" aria-pressed="false">▣ Painel compacto</button><h2>Parâmetros da demonstração</h2>
 <label for="speed">Velocidade <output id="speedValue"></output></label><input id="speed" type="range" min="0" max="950" step="5" value="650">
 <label for="alt">Altitude <output id="altValue"></output></label><input id="alt" type="range" min="100" max="11000" step="50" value="3000">
 <label for="heading">Rumo <output id="headingValue"></output></label><input id="heading" type="range" min="0" max="359" step="1" value="110">

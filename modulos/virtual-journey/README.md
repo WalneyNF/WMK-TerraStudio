@@ -2,6 +2,16 @@
 
 **Primeira versão demonstrativa independente**, criada para acompanhar a suíte WMK TerraStudio. Não é ainda uma experiência fotorrealista ou um simulador com física aeronáutica.
 
+## Consultar aeronaves reais (ADSB.lol)
+
+Inicie com **`INICIAR.cmd`** (requer PHP/XAMPP). Escolha uma região, clique em **Buscar aeronaves** e selecione um voo da lista. O servidor consulta a [API ADS-B.lol](https://www.adsb.lol/docs/open-data/api) num raio de 100 milhas náuticas. Dados disponíveis: identificação, matrícula, tipo ICAO (quando informado), latitude, longitude, altitude, velocidade sobre o solo e rumo.
+
+**Limites:** a API gratuita tem 500 chamadas/dia/IP, sujeitas a alterações. O módulo aplica cache de 180 s, intervalo mínimo de 180 s entre consultas externas e limite local de 430 chamadas/dia. As buscas são **manuais**, sem polling frequente. Não há garantia de cobertura de todas as regiões.
+
+Após selecionar um avião, o movimento 3D é **projetado** por no máximo 20 segundos a partir dos dados recebidos. NÃO equivale a vídeo real, nem fornece instrumentos internos, rotas completas ou destinos. Cockpits são ilustrativos. Quando o modelo não é reconhecido, usamos painel genérico explicitamente identificado.
+
+O painel ganhou modo compacto para ampliar o campo de visão. Se não aparecer terreno/imagem, verifique tiles OSM, conexão, WebGL e drivers de vídeo.
+
 ## O que está implementado
 
 - Globo 3D CesiumJS, sem token Ion, com imagem cartográfica OpenStreetMap e terreno elipsoidal (não há terreno fotográfico/altimétrico nesta versão).

@@ -15,6 +15,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+      - name: Testar endpoint ADS-B sem rede
+        working-directory: modulos/virtual-journey
+        run: |
+          php -l api/flights_lib.php
+          php -l api/flights.php
+          php tests/flights.php
       - name: Testar física demonstrativa e biblioteca de modelos
         working-directory: modulos/virtual-journey
         run: npm test
