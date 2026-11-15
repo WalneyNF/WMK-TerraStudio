@@ -34,11 +34,12 @@
         {
           "id": "BRAND-03",
           "name": "Inserir o PNG original da logo aprovada no GitHub e ícone nativo",
-          "state": "blocked",
-          "note": "A arte aprovada está na conversa, mas o arquivo binário ainda precisa ser incorporado no repositório; não substituir por desenho diferente",
+          "state": "implemented",
+          "note": "PNG aprovado incorporado em resolução otimizada de 64 px; aguardando validação do novo EXE e substituição por recurso de maior resolução",
           "dependsOn": [
             "BRAND-02"
-          ]
+          ],
+          "evidence": "assets/wmk-terrastudio-icon.png; crates/render/src/logo.rs"
         },
         {
           "id": "BRAND-04",
@@ -93,7 +94,8 @@
         {
           "id": "WIN-02",
           "name": "GitHub Actions concluir cargo test e cargo build",
-          "state": "testing"
+          "state": "done",
+          "evidence": "https://github.com/WalneyNF/WMK-TerraStudio/actions/runs/43685162247"
         },
         {
           "id": "WIN-03",
@@ -110,6 +112,13 @@
           "dependsOn": [
             "WIN-03"
           ]
+        },
+        {
+          "id": "WIN-05",
+          "name": "Distribuir WMK-TerraStudio.exe com ícone oficial e ZIP portátil",
+          "state": "implemented",
+          "evidence": ".github/workflows/wmk-windows.yml; assets/wmk-terrastudio-icon.png",
+          "note": "Aguardando resultado da nova compilação"
         }
       ]
     },

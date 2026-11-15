@@ -19,7 +19,13 @@
 
 O WMK TerraStudio é uma proposta de ambiente profissional para **mapas, SIG (Sistema de Informações Geográficas), análise espacial, imagens de satélite e dados de localização**, construída sobre a base tecnológica do RustGIS. O motor original já oferece aplicativos desktop e web, biblioteca Python, linha de comando, integração por MCP e plugins.
 
-A personalização **WMK será feita por etapas**. Nesta primeira etapa são alterados apenas a documentação e os recursos visuais do repositório. **O nome interno, o ícone do executável e o aplicativo compilado continuam RustGIS** até sua migração e validação. Não confunda esta etapa documental com uma versão pronta para instalar.
+A personalização **WMK será feita por etapas**. Nesta primeira etapa são alterados apenas a documentação e os recursos visuais do repositório. **A janela e os metadados Windows já usam WMK TerraStudio; a compilação Windows de teste passou após corrigir a tradução.** O motor ainda preserva identificadores RustGIS para compatibilidade. A inclusão do ícone original e o nome portátil `WMK-TerraStudio.exe` estão em validação no workflow. Não confunda esta etapa documental com uma versão pronta para instalar.
+
+## Download do Windows (build verificado)
+
+Um pacote **Windows x64** com a tradução pt-BR foi compilado com sucesso no GitHub Actions. [Baixe o artefato experimental](https://github.com/WalneyNF/WMK-TerraStudio/actions/runs/43685162247/artifacts/14150578532) (pode exigir login). Essa compilação anterior à integração da logo oficial ainda tem nome de arquivo interno `rustgis.exe`.
+
+**Novo pacote com logo WMK e `WMK-TerraStudio.exe`:** acompanhe o workflow [Windows x64](https://github.com/WalneyNF/WMK-TerraStudio/actions/workflows/wmk-windows.yml). Só será disponibilizado como versão final depois que os testes do ícone e a compilação mais recente terminarem.
 
 ## Recursos da base RustGIS
 

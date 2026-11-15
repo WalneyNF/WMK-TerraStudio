@@ -7,6 +7,7 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../../crates/render/src/logo.rs");
+    println!("cargo:rerun-if-changed=../../assets/wmk-terrastudio-icon.png");
     #[cfg(windows)]
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("windows") {
         windows::embed_icon()?;
@@ -27,7 +28,7 @@ mod windows {
     /// references it, then compiles and links the script.
     pub fn embed_icon() -> Result<(), Box<dyn std::error::Error>> {
         let out = PathBuf::from(std::env::var("OUT_DIR")?);
-        let ico = out.join("rustgis.ico");
+        let ico = out.join("WMK-TerraStudio.ico");
         std::fs::write(&ico, super::logo::ico().ok_or("could not draw the icon")?)?;
         let version = std::env::var("CARGO_PKG_VERSION")?;
         // VERSIONINFO wants four numbers: drop a pre-release suffix (0.2.0-rc.1 -> 0,2,0,0).
@@ -52,7 +53,7 @@ BEGIN
       VALUE "FileVersion", "{version}"
       VALUE "InternalName", "rustgis"
       VALUE "LegalCopyright", "RustGIS contributors (Apache-2.0); WMK: Walney Moreira Klein."
-      VALUE "OriginalFilename", "rustgis.exe"
+      VALUE "OriginalFilename", "WMK-TerraStudio.exe"
       VALUE "ProductName", "WMK TerraStudio"
       VALUE "ProductVersion", "{version}"
     END

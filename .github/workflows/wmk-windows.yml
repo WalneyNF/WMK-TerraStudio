@@ -7,6 +7,7 @@ on:
       - 'crates/ui-egui/src/i18n/**'
       - 'apps/rustgis/**'
       - 'crates/render/src/logo.rs'
+      - 'assets/wmk-terrastudio-icon.png'
 permissions:
   contents: read
 jobs:
@@ -18,7 +19,9 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - name: Testes de tradução e locale
-        run: cargo test --locked -p rustgis-ui-egui i18n
+        run: |
+          cargo test --locked -p rustgis-ui-egui i18n
+          cargo test --locked -p rustgis-render logo
   windows:
     name: Compilar Windows x64
     runs-on: windows-latest
@@ -38,9 +41,13 @@ jobs:
           $ErrorActionPreference='Stop'
           $folder='dist/WMK-TerraStudio-Windows-x64'
           New-Item -ItemType Directory -Force -Path $folder | Out-Null
-          Copy-Item 'target/release/rustgis.exe' $folder
+          Copy-Item 'target/release/rustgis.exe' (Join-Path $folder 'WMK-TerraStudio.exe')
           Copy-Item 'target/release/rustgis-cli.exe' $folder
           Copy-Item 'LICENSE','ATTRIBUTION.md','THIRD-PARTY-LICENSES.txt','README.md' $folder
+          Copy-Item 'assets/wmk-terrastudio-icon.png' (Join-Path $folder 'WMK-TerraStudio-logo.png')
+          $exe=Join-Path $folder 'WMK-TerraStudio.exe'
+          if (-not (Test-Path $exe)) { throw 'Executavel WMK-TerraStudio.exe ausente' }
+          Write-Host "Executavel encontrado: $exe"
           Compress-Archive -Path $folder -DestinationPath 'dist/WMK-TerraStudio-Windows-x64.zip' -Force
           (Get-FileHash 'dist/WMK-TerraStudio-Windows-x64.zip' -Algorithm SHA256).Hash.ToLower() + '  WMK-TerraStudio-Windows-x64.zip' | Set-Content 'dist/SHA256SUMS'
       - uses: actions/upload-artifact@v4
