@@ -3,7 +3,7 @@ import json, os, time
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlencode, urlsplit
 from threading import Lock
@@ -14,6 +14,24 @@ SOURCES={
  "events":("https://eonet.gsfc.nasa.gov/api/v3/events?status=open&limit=100",600),
  "weather":("https://api.open-meteo.com/v1/forecast",600)}
 CACHE={}
+INTEGRATIONS={
+ "planet-watch":"http://127.0.0.1:8788/health",
+ "geo-bridge":"http://127.0.0.1:8766/health",
+ "gps-tracker":"http://127.0.0.1:8082/api/server",
+ "geo-intelligence":"http://127.0.0.1:4173/"
+}
+
+def integration_status():
+    """Diagnóstico de rede de URLs fixas, sem consultar dados privados nem tokens."""
+    result=[]
+    for service,endpoint in INTEGRATIONS.items():
+        try:
+            with urlopen(Request(endpoint, method="GET"), timeout=1.0) as reply:
+                status=reply.status
+            result.append({"id":service,"reachable":200<=status<400,"httpStatus":status})
+        except (OSError,ValueError):
+            result.append({"id":service,"reachable":False,"httpStatus":None})
+    return {"services":result,"note":"reachable significa HTTP acessível, não autenticação, dados nem integração validada"}
 LOCK=Lock()
 
 def external_json(url):
@@ -77,6 +95,7 @@ class Handler(BaseHTTPRequestHandler):
         if path=="/app.js":return self.send_file("app.js","application/javascript; charset=utf-8")
         if path=="/health":return self.send_json(200,{"status":"ok","name":"WMK Planet Watch","version":"0.1.0"})
         if path=="/api/sources":return self.send_json(200,{"sources":["earthquakes","events","weather"],"gps":"disabled_until_authenticated"})
+        if path=="/api/integrations":return self.send_json(200,integration_status())
         if path=="/api/gps":return self.send_json(403,{"error":"gps_read_requires_authentication"})
         if path.startswith("/api/"):
             source=path[5:]

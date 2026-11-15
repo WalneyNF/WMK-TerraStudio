@@ -1,0 +1,53 @@
+name: WMK TerraStudio - Windows x64 (teste)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/wmk-windows.yml'
+      - 'crates/ui-egui/src/i18n/**'
+      - 'apps/rustgis/**'
+      - 'crates/render/src/logo.rs'
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Validar catálogo pt-BR
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Testes de tradução e locale
+        run: cargo test --locked -p rustgis-ui-egui i18n
+  windows:
+    name: Compilar Windows x64
+    runs-on: windows-latest
+    timeout-minutes: 180
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc
+      - uses: Swatinem/rust-cache@v2
+      - name: Build release
+        run: cargo build --release --locked -p rustgis -p rustgis-cli
+      - name: Pacote portátil
+        shell: pwsh
+        run: |
+          $ErrorActionPreference='Stop'
+          $folder='dist/WMK-TerraStudio-Windows-x64'
+          New-Item -ItemType Directory -Force -Path $folder | Out-Null
+          Copy-Item 'target/release/rustgis.exe' $folder
+          Copy-Item 'target/release/rustgis-cli.exe' $folder
+          Copy-Item 'LICENSE','ATTRIBUTION.md','THIRD-PARTY-LICENSES.txt','README.md' $folder
+          Compress-Archive -Path $folder -DestinationPath 'dist/WMK-TerraStudio-Windows-x64.zip' -Force
+          (Get-FileHash 'dist/WMK-TerraStudio-Windows-x64.zip' -Algorithm SHA256).Hash.ToLower() + '  WMK-TerraStudio-Windows-x64.zip' | Set-Content 'dist/SHA256SUMS'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WMK-TerraStudio-Windows-x64-portatil
+          path: |
+            dist/WMK-TerraStudio-Windows-x64.zip
+            dist/SHA256SUMS
+          retention-days: 14
+          if-no-files-found: error

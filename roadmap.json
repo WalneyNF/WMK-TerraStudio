@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0",
+  "project": "WMK TerraStudio",
+  "updatedAt": "2026-11-15",
+  "repository": "https://github.com/WalneyNF/WMK-TerraStudio",
+  "statusDefinitions": {
+    "done": "Código incorporado à main e verificado no repositório",
+    "implemented": "Código criado na branch; build ou testes ainda pendentes",
+    "testing": "Em validação",
+    "planned": "Previsto, ainda não implementado",
+    "blocked": "Depende de pré-requisito"
+  },
+  "modules": [
+    {
+      "id": "identity",
+      "name": "Identidade e documentação",
+      "category": "Fundação",
+      "owner": "WMK",
+      "description": "Marca, README e manuais",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "BRAND-01",
+          "name": "README pt-BR com créditos WMK e RustGIS",
+          "state": "done",
+          "evidence": "README.md"
+        },
+        {
+          "id": "BRAND-02",
+          "name": "Nome WMK TerraStudio na janela e metadados Windows",
+          "state": "implemented",
+          "evidence": "apps/rustgis/src/main.rs; apps/rustgis/build.rs"
+        },
+        {
+          "id": "BRAND-03",
+          "name": "Inserir o PNG original da logo aprovada no GitHub e ícone nativo",
+          "state": "blocked",
+          "note": "A arte aprovada está na conversa, mas o arquivo binário ainda precisa ser incorporado no repositório; não substituir por desenho diferente",
+          "dependsOn": [
+            "BRAND-02"
+          ]
+        },
+        {
+          "id": "BRAND-04",
+          "name": "Renomear instalador/atalhos e pacote sem afetar formatos internos",
+          "state": "planned"
+        }
+      ]
+    },
+    {
+      "id": "i18n",
+      "name": "Tradução pt-BR",
+      "category": "Fundação",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "I18N-01",
+          "name": "Preservar catálogo pt e incluir variante pt-br com 4.480 entradas",
+          "state": "implemented",
+          "evidence": "crates/ui-egui/src/i18n/pt-br.tsv"
+        },
+        {
+          "id": "I18N-02",
+          "name": "Selecionar Português (Brasil) e reconhecer localidade pt-BR",
+          "state": "implemented",
+          "evidence": "crates/ui-egui/src/i18n/mod.rs"
+        },
+        {
+          "id": "I18N-03",
+          "name": "Testes de placeholders, localização e fallback",
+          "state": "implemented",
+          "evidence": "crates/ui-egui/src/i18n/tests.rs"
+        },
+        {
+          "id": "I18N-04",
+          "name": "Revisão humana integral de terminologia e capturas de tela",
+          "state": "planned"
+        }
+      ]
+    },
+    {
+      "id": "windows",
+      "name": "Build Windows",
+      "category": "Distribuição",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "WIN-01",
+          "name": "Workflow Windows x64 manual com testes e ZIP portátil",
+          "state": "implemented",
+          "evidence": ".github/workflows/wmk-windows.yml"
+        },
+        {
+          "id": "WIN-02",
+          "name": "GitHub Actions concluir cargo test e cargo build",
+          "state": "testing"
+        },
+        {
+          "id": "WIN-03",
+          "name": "Testar abertura em Windows 10 e backend OpenGL",
+          "state": "planned",
+          "dependsOn": [
+            "WIN-02"
+          ]
+        },
+        {
+          "id": "WIN-04",
+          "name": "Publicar release após homologação, com SHA256 e changelog",
+          "state": "planned",
+          "dependsOn": [
+            "WIN-03"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "planet",
+      "name": "Planet Watch",
+      "category": "Observação",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "PLANET-01",
+          "name": "USGS, NASA EONET e Open-Meteo em mapa web local",
+          "state": "done",
+          "evidence": "modulos/planet-watch"
+        },
+        {
+          "id": "PLANET-02",
+          "name": "Contrato público GeoJSON reutilizável por apps WMK",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/server.py; modulos/planet-watch/exportar_geojson.py"
+        },
+        {
+          "id": "PLANET-03",
+          "name": "Monitor local de serviços WMK com diagnóstico e URL fixa",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/server.py"
+        },
+        {
+          "id": "PLANET-04",
+          "name": "Conector INPE, webcams e qualidade do ar",
+          "state": "planned"
+        },
+        {
+          "id": "PLANET-05",
+          "name": "Exportador GeoJSON USGS/NASA com testes sem rede",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/exportar_geojson.py; modulos/planet-watch/tests/test_export.py",
+          "note": "A importação gráfica do arquivo no TerraStudio ainda requer teste Windows"
+        }
+      ]
+    },
+    {
+      "id": "geo",
+      "name": "Geo Intelligence 3D",
+      "category": "Integrações",
+      "state": "planned",
+      "tasks": [
+        {
+          "id": "GEO-01",
+          "name": "Verificar servidor MCP existente no Geo Intelligence",
+          "state": "done",
+          "evidence": "https://github.com/WalneyNF/WMK-Geo-Intelligence/blob/main/server/mcp/stdio.js"
+        },
+        {
+          "id": "GEO-02",
+          "name": "Adaptador de aeronaves ADS-B/OpenSky por API autorizada",
+          "state": "planned"
+        },
+        {
+          "id": "GEO-03",
+          "name": "Sincronizar câmera/camadas com Cesium por contrato versionado",
+          "state": "planned"
+        },
+        {
+          "id": "GEO-04",
+          "name": "Integração AIS e satélites do Geo Intelligence",
+          "state": "planned"
+        }
+      ]
+    },
+    {
+      "id": "gps",
+      "name": "GPS Tracker e Geo Bridge",
+      "category": "Integrações",
+      "state": "blocked",
+      "tasks": [
+        {
+          "id": "GPS-01",
+          "name": "Documentar endpoints do Bridge e resposta do Traccar",
+          "state": "done",
+          "evidence": "https://github.com/WalneyNF/WMK-Geo-Bridge/blob/main/src/bridge.py"
+        },
+        {
+          "id": "GPS-02",
+          "name": "Autenticar e autorizar consultas sensíveis no Bridge",
+          "state": "blocked",
+          "note": "O endpoint GET legado expõe dados de localização a clientes locais sem autenticação própria"
+        },
+        {
+          "id": "GPS-03",
+          "name": "Exportar dispositivos permitidos para GeoJSON",
+          "state": "planned",
+          "dependsOn": [
+            "GPS-02"
+          ]
+        },
+        {
+          "id": "GPS-04",
+          "name": "Histórico, geocercas e replay",
+          "state": "planned"
+        }
+      ]
+    },
+    {
+      "id": "mcp",
+      "name": "IA e MCP",
+      "category": "Automação",
+      "state": "planned",
+      "tasks": [
+        {
+          "id": "MCP-01",
+          "name": "MCP do RustGIS já presente na base",
+          "state": "done",
+          "evidence": "docs/mcp.md"
+        },
+        {
+          "id": "MCP-02",
+          "name": "Testar controle da janela desktop por MCP attach/HTTP",
+          "state": "planned",
+          "dependsOn": [
+            "WIN-02"
+          ]
+        },
+        {
+          "id": "MCP-03",
+          "name": "Catálogo unificado de ferramentas com permissão por ação",
+          "state": "planned"
+        },
+        {
+          "id": "MCP-04",
+          "name": "Ollama, OpenAI, Gemini, Groq via provedor compatível: testes e custos",
+          "state": "planned"
+        }
+      ]
+    }
+  ]
+}

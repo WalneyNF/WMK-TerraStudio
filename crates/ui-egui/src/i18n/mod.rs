@@ -87,7 +87,7 @@ macro_rules! lang {
 }
 
 /// The registry. English first: it is the source language and the fallback.
-pub static LANGUAGES: [LangInfo; 22] = [
+pub static LANGUAGES: [LangInfo; 23] = [
     LangInfo {
         code: "en",
         name: "English",
@@ -104,6 +104,7 @@ pub static LANGUAGES: [LangInfo; 22] = [
     lang!("nl", "Nederlands", "Dutch", Script::Alphabetic, "nl.tsv"),
     lang!("pl", "Polski", "Polish", Script::Alphabetic, "pl.tsv"),
     lang!("pt", "Português", "Portuguese", Script::Alphabetic, "pt.tsv"),
+    lang!("pt-br", "Português (Brasil)", "Portuguese (Brazil)", Script::Alphabetic, "pt-br.tsv"),
     lang!("ru", "Русский", "Russian", Script::Alphabetic, "ru.tsv"),
     lang!("tr", "Türkçe", "Turkish", Script::Alphabetic, "tr.tsv"),
     lang!("az", "Azərbaycanca", "Azerbaijani", Script::Alphabetic, "az.tsv"),
@@ -285,13 +286,16 @@ pub fn lang_from_tag(tag: &str) -> Option<Lang> {
     // `Hans` script asks for Simplified (`zh-Hans-TW`). Hong Kong and Macau have no catalog of
     // their own: they fall back to English whatever the script (`zh-Hans-HK` too), as before.
     if primary == "zh" {
-        let rest: Vec<&str> = parts.collect();
+        let rest: Vec<&str> = parts.clone().collect();
         if rest.iter().any(|p| matches!(*p, "hk" | "mo")) {
             return None;
         }
         if !rest.contains(&"hans") && rest.iter().any(|p| matches!(*p, "hant" | "tw")) {
             return Lang::from_code("zh-tw");
         }
+    }
+    if primary == "pt" && parts.any(|part| part == "br") {
+        return Lang::from_code("pt-br");
     }
     Lang::from_code(primary)
 }

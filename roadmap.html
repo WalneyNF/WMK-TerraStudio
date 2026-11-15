@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WMK TerraStudio — Roadmap integrado</title>
+<style>
+:root{font:14px/1.5 system-ui,Arial;background:#091720;color:#eef9f6;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;min-height:100vh}header{background:#0e2b33;padding:22px max(20px,calc((100vw - 1250px)/2));border-bottom:1px solid #22655c}
+h1{margin:0;font-size:26px;color:#79f7bd}h2{margin:0 0 8px}p{color:#afc7c6;margin:8px 0}
+main{max-width:1250px;margin:0 auto;padding:20px}a{color:#7eecc3}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}
+button,select,input{border:1px solid #316f69;border-radius:8px;padding:9px;background:#10333d;color:#edfaf5;font:inherit}
+button{cursor:pointer}button:hover{background:#155454}button:focus-visible{outline:2px solid #7cfbbf}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:15px 0}
+.stat,.module{border:1px solid #255a57;border-radius:12px;background:#102830;padding:14px}.stat strong{display:block;font-size:26px;color:#82efb9}
+.modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.item{padding:10px 0;border-top:1px solid #25454d}
+.item .top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+.badge{font-size:11px;border:1px solid #537c7c;padding:2px 7px;border-radius:30px;white-space:nowrap}
+.done{color:#8bf2b8}.implemented{color:#a9dcff}.testing{color:#f5d38b}.blocked{color:#ff9c9c}.planned{color:#b7c7cc}
+small{display:block;color:#a4bcbf}#feedback{color:#a0e8d2}footer{border-top:1px solid #275456;padding:20px;color:#adbdc2;text-align:center}
+@media(max-width:600px){.modules{grid-template-columns:1fr}}
+</style></head>
+<body><header><h1>🌎 WMK TerraStudio — Roadmap</h1><p>Planejamento centralizado em JSON • Projeto GIS, monitoramento mundial, IA/MCP e integrações</p></header>
+<main>
+<div class="toolbar"><label for="state">Situação</label><select id="state"><option value="">Todas</option><option value="done">Concluído no código</option><option value="implemented">Implementado, não validado</option><option value="testing">Em testes</option><option value="planned">Planejado</option><option value="blocked">Bloqueado</option></select>
+<label for="query">Pesquisar</label><input id="query" placeholder="MCP, Windows, GPS..." aria-label="Pesquisar tarefas">
+<button id="refresh">Recarregar JSON</button><button id="export">Exportar Markdown</button><a href="roadmap.json" download>Baixar roadmap.json</a></div>
+<p id="feedback" aria-live="polite">Carregando roadmap.json…</p><div id="stats" class="stats"></div><div id="modules" class="modules"></div>
+<section><h2>Documentos e códigos</h2><p><a href="README.md">README</a> · <a href="manuais/ROADMAP-WMK.md">Roadmap narrativo</a> · <a href="modulos/planet-watch/README.md">Planet Watch</a> · <a href="https://github.com/WalneyNF/WMK-TerraStudio/actions">GitHub Actions</a></p>
+<p>Para atualizar o progresso, edite <code>roadmap.json</code> no GitHub e recarregue esta página. O painel é de leitura; não declara automaticamente que tarefas foram concluídas. Sirva por HTTP: <code>py -3 -m http.server 8790</code> na raiz do repositório.</p></section>
+</main><footer>Walney Moreira Klein — walneyk@hotmail.com • Fork do RustGIS / opengeos (Apache-2.0)</footer>
+<script>
+"use strict";
+let project=null;
+const label={done:"Concluído",implemented:"Implementado",testing:"Em testes",planned:"Planejado",blocked:"Bloqueado"};
+const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function tasks(){return project.modules.flatMap(m=>m.tasks.map(t=>({...t,module:m.name})))}
+function draw(){
+ if(!project)return;
+ const all=tasks(), states=Object.keys(label),complete=all.filter(t=>t.state==="done").length;
+ document.getElementById("stats").innerHTML=
+ '<div class="stat"><strong>'+all.length+'</strong>Tarefas</div>'+
+ '<div class="stat"><strong>'+complete+'</strong>Concluídas</div>'+
+ '<div class="stat"><strong>'+all.filter(t=>t.state==="implemented").length+'</strong>Implementadas, sem homologação</div>'+
+ '<div class="stat"><strong>'+all.filter(t=>t.state==="blocked").length+'</strong>Bloqueadas</div>'+
+ '<div class="stat"><strong>'+Math.round(100*complete/Math.max(1,all.length))+'%</strong>Concluído no código</div>';
+ const filter=document.getElementById("state").value,q=document.getElementById("query").value.trim().toLowerCase();
+ const content=project.modules.map(m=>{
+   const rows=m.tasks.filter(t=>(!filter||t.state===filter)&&(!q||(t.id+" "+t.name+" "+(t.note||"")+" "+m.name).toLowerCase().includes(q)));
+   if(!rows.length)return "";
+   return '<section class="module"><h2>'+esc(m.name)+'</h2><small>'+esc(m.category||"")+'</small>'+
+    rows.map(t=>'<div class="item"><div class="top"><div><strong>'+esc(t.id)+'</strong> · '+esc(t.name)+'</div><span class="badge '+esc(t.state)+'">'+esc(label[t.state]||t.state)+'</span></div>'+
+    (t.note?'<small>'+esc(t.note)+'</small>':"")+(t.evidence?'<small>Arquivo/evidência: '+esc(t.evidence)+'</small>':"")+
+    (t.dependsOn?'<small>Depende de: '+esc(t.dependsOn.join(", "))+'</small>':"")+'</div>').join("")+'</section>';
+ }).join("");
+ document.getElementById("modules").innerHTML=content||"<p>Nenhuma tarefa corresponde ao filtro.</p>";
+}
+async function load(){
+ try{const res=await fetch("roadmap.json",{cache:"no-store"});if(!res.ok)throw Error("HTTP "+res.status);
+ const data=await res.json();if(!data||!Array.isArray(data.modules))throw Error("JSON inválido");
+ project=data;document.getElementById("feedback").textContent="Carregado: "+data.project+" • atualização declarada "+data.updatedAt;draw();
+ }catch(e){document.getElementById("feedback").textContent="Falha ao carregar roadmap.json ("+e.message+"). Abra via servidor HTTP na pasta do projeto."}
+}
+document.getElementById("refresh").addEventListener("click",load);
+document.getElementById("state").addEventListener("change",draw);
+document.getElementById("query").addEventListener("input",draw);
+document.getElementById("export").addEventListener("click",()=>{
+ if(!project)return;
+ const content=["# "+project.project+" — Roadmap","Atualizado: "+project.updatedAt];
+ for(const m of project.modules){content.push("","## "+m.name);for(const t of m.tasks)content.push("- ["+(t.state==="done"?"x":" ")+"] "+t.id+" "+t.name+" — "+(label[t.state]||t.state));}
+ const blob=new Blob([content.join("\n")+"\n"],{type:"text/markdown;charset=utf-8"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="WMK-TerraStudio-roadmap.md";a.click();URL.revokeObjectURL(url);
+});
+load();
+</script></body></html>

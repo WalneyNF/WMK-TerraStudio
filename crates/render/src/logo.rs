@@ -1,5 +1,5 @@
-//! The RustGIS logo, drawn in code: a rust-coloured cog framing a globe split into four
-//! segments by white gaps, with a tilted orbit. The same design is published as SVG in
+//! WMK TerraStudio: paleta de identidade verde/teal aplicada ao ícone gerado em Rust.
+//! A arte PNG oficial fornecida pelo autor ainda deve substituir o traçado vetorial original.
 //! rustgis-assets; this keeps the app free of image files.
 
 use tiny_skia::{
@@ -25,7 +25,7 @@ fn solid(r: u8, g: u8, b: u8, a: u8) -> Paint<'static> {
     p
 }
 
-const RUST: ((u8, u8, u8), (u8, u8, u8)) = ((0xE4, 0x78, 0x3D), (0xA8, 0x3F, 0x24));
+const RUST: ((u8, u8, u8), (u8, u8, u8)) = ((0x19, 0xD8, 0xA5), (0x07, 0x66, 0x65));
 
 /// The logo as a premultiplied RGBA pixmap of `size`×`size` pixels (16..=1024).
 pub fn pixmap(size: u32) -> Option<Pixmap> {
