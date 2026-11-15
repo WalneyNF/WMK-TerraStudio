@@ -1,254 +1,102 @@
 <p align="center">
-  <img src="https://assets.rustgis.app/images/logo.svg" alt="RustGIS logo: a rust-coloured cog framing a segmented globe with an orbit" width="160">
+  <img src="assets/wmk-terrastudio.svg" alt="Identidade visual do WMK TerraStudio" width="780">
 </p>
 
-<h1 align="center">RustGIS</h1>
+<h1 align="center">WMK TerraStudio</h1>
 
+<p align="center"><strong>Estúdio de cartografia, geoprocessamento e inteligência geográfica</strong></p>
+<p align="center"><strong>Walney Moreira Klein — walneyk@hotmail.com</strong></p>
 <p align="center">
-  <b>A fast, free and open-source GIS in pure Rust for mapping, analyzing and sharing geospatial data.</b><br>
-  Native on Windows, macOS and Linux, and in your web browser. Your data stays on your machine
-  unless you send it to an AI model you choose, and every action is a command you can script.
+  <a href="https://github.com/WalneyNF/WMK-TerraStudio/actions"><img alt="GitHub Actions" src="https://img.shields.io/badge/Windows-em%20prepara%C3%A7%C3%A3o-157c71"></a>
+  <img alt="Rust" src="https://img.shields.io/badge/motor-Rust-b04e31">
+  <img alt="Licença" src="https://img.shields.io/badge/licen%C3%A7a-Apache--2.0-2563eb">
+  <img alt="Idioma" src="https://img.shields.io/badge/documenta%C3%A7%C3%A3o-pt--BR-009b73">
 </p>
 
-<p align="center">
-  <img alt="Written in Rust" src="https://img.shields.io/badge/written%20in-Rust-b84a2c?style=flat-square&logo=rust&logoColor=white">
-  <img alt="License: Apache-2.0" src="https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square">
-  <img alt="22 languages" src="https://img.shields.io/badge/languages-22-0e9384?style=flat-square">
-  <a href="https://plugins.rustgis.app"><img alt="Plugins" src="https://img.shields.io/badge/plugins-registry-7c3aed?style=flat-square"></a>
-  <a href="https://pypi.org/project/rustgis/"><img alt="PyPI" src="https://img.shields.io/pypi/v/rustgis?style=flat-square&logo=python&logoColor=white&label=pypi"></a>
-  <a href="https://colab.research.google.com/github/opengeos/RustGIS/blob/main/apps/rustgis-python/examples/getting-started.ipynb"><img alt="Open in Colab" src="https://colab.research.google.com/assets/colab-badge.svg"></a>
-  <a href="https://doi.org/10.5281/zenodo.23633281"><img alt="DOI" src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23633281-1682d4?style=flat-square"></a>
-</p>
+> **Origem e atribuições:** O WMK TerraStudio é um fork independente de [RustGIS, do projeto opengeos](https://github.com/opengeos/RustGIS). Toda a base original permanece creditada aos respectivos autores e colaboradores, sob a licença **Apache-2.0**. A identidade WMK e a documentação em português são personalizações do fork. Este projeto **não é uma distribuição oficial** do RustGIS. Consulte [LICENSE](LICENSE), [ATTRIBUTION.md](ATTRIBUTION.md), [THIRD-PARTY-LICENSES.txt](THIRD-PARTY-LICENSES.txt) e [NOTICE de atribuições WMK](manuais/ATRIBUICOES.md).
 
-<p align="center">
-  <a href="https://web.rustgis.app"><img alt="Launch the RustGIS web app" src="https://img.shields.io/badge/Launch-web%20app-b84a2c?style=for-the-badge&logo=webassembly&logoColor=white" height="36"></a>
-  <a href="https://github.com/opengeos/RustGIS/releases/latest"><img alt="Download the desktop app" src="https://img.shields.io/badge/Download-desktop%20app-2563eb?style=for-the-badge&logo=github&logoColor=white" height="36"></a>
-  <a href="https://rustgis.app"><img alt="Read the documentation" src="https://img.shields.io/badge/Read-the%20docs-0e9384?style=for-the-badge&logo=materialformkdocs&logoColor=white" height="36"></a>
-  <a href="https://rustgis.app/videos/"><img alt="Watch the video tutorials" src="https://img.shields.io/badge/Watch-video%20tutorials-dc2626?style=for-the-badge&logo=youtube&logoColor=white" height="36"></a>
-  <a href="https://apps.microsoft.com/detail/9ppjw8h561lq?mode=direct"><img alt="Get it from Microsoft" src="https://get.microsoft.com/images/en-us%20dark.svg" height="36"></a>
-</p>
+## Apresentação
 
-<p align="center">
-  <img src="https://assets.rustgis.app/images/hero.webp" alt="RustGIS with the Home tab of the ribbon open. The Layers pane lists Cities, Rivers, Lakes and Countries with their legends; the map shows the world in the Equal Earth projection, countries shaded by population, sized city dots and country labels." width="100%">
-</p>
+O WMK TerraStudio é uma proposta de ambiente profissional para **mapas, SIG (Sistema de Informações Geográficas), análise espacial, imagens de satélite e dados de localização**, construída sobre a base tecnológica do RustGIS. O motor original já oferece aplicativos desktop e web, biblioteca Python, linha de comando, integração por MCP e plugins.
 
-## Why RustGIS
+A personalização **WMK será feita por etapas**. Nesta primeira etapa são alterados apenas a documentação e os recursos visuais do repositório. **O nome interno, o ícone do executável e o aplicativo compilado continuam RustGIS** até sua migração e validação. Não confunda esta etapa documental com uma versão pronta para instalar.
 
-- **Fast and small.** One native program, drawn on the GPU, with no runtime to install and no
-  server to run.
-- **Runs everywhere.** The same app on Windows, macOS and Linux, and compiled to WebAssembly at
-  [web.rustgis.app](https://web.rustgis.app) with nothing to install.
-- **Local and private.** Your files are read and written on your machine, and nothing is uploaded
-  on its own. The network is used only when you ask for it: web basemaps, plugins, the GeoLibre
-  tools and the AI model you pick, which receives your questions and the data it reads to answer
-  them.
-- **Everything is a command.** Every button in the ribbon is a command with an id. Script it from
-  `rustgis-cli`, chain it in notebooks and models, use completion in the Script pane, or ask the
-  AI Assistant to run it for you.
-- **Familiar.** A ribbon laid out in the order of the work (Home, Data, Style, Edit, Analyze,
-  View, Publish), Layers and Browser panes, an attribute table, and undo for every change.
-- **Extensible.** Over 1,000 GeoLibre and Whitebox tools for terrain, hydrology, LiDAR and remote sensing, and
-  sandboxed WebAssembly [plugins](docs/plugins.md) that add commands, tools and ribbon tabs.
+## Recursos da base RustGIS
 
-## A tour
+| Área | O que permite fazer |
+| --- | --- |
+| Mapas | Visualizar mapas 2D, camadas, legendas, rótulos, projeções, globo 3D e terreno |
+| Formatos | Abrir e converter GeoJSON, Shapefile, CSV, GeoPackage, GeoTIFF, GPX, KML/KMZ e vários outros formatos |
+| Serviços | Utilizar serviços XYZ, WMS, WMTS, WFS, ArcGIS REST e tiles vetoriais, conforme plataforma |
+| Edição | Criar e editar feições, vértices, atributos, simbologia e propriedades |
+| Análise | Medir áreas e distâncias, criar buffers, cruzar camadas, analisar densidade, redes, relevo e visibilidade |
+| Cartografia | Montar layouts, escalas, legendas, relatórios e exportações |
+| Automação | Executar comandos por CLI, Python, ModelBuilder e agentes integrados por MCP |
+| Extensões | Adicionar ferramentas com plugins WebAssembly e mecanismos de extensão disponíveis na versão original |
 
-Prefer a video? [RustGIS: A Fast, Free GIS That Runs on Your Desktop and in Your
-Browser](https://youtu.be/XFhqlSiKn6U) walks through the main features, and the
-[Video Tutorials](https://rustgis.app/videos/) page collects the rest of the
-[playlist](https://www.youtube.com/playlist?list=PLBQuwPke8dNI).
+**Observação:** nem todos os recursos funcionam em todas as plataformas. Alguns dependem de serviços externos, credenciais ou programas opcionais. Consulte o [guia original](https://rustgis.app) para limitações e requisitos.
 
-<table>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/symbology-table.webp" alt="The Style tab with the Symbology pane showing graduated colours and colour schemes; the larger African countries are selected in cyan on the map and highlighted in the attribute table below" width="100%"><p align="center"><sub><b>Symbology and tables.</b> Graduated colours, with the selection synced to the table.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/assistant.webp" alt="The AI Assistant pane: asked for the five most populous African countries, it read the Countries table, selected them and zoomed to them" width="100%"><p align="center"><sub><b>AI Assistant.</b> Ask about your data or tell the map what to do.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/buffer-history.webp" alt="The Analyze tab with a gallery of geoprocessing tools and the Tools pane showing Buffer; dissolved 300 km buffers around African cities" width="100%"><p align="center"><sub><b>Analysis.</b> A tool gallery, the Tools pane and 1,000+ GeoLibre tools.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/raster.webp" alt="A shaded-relief elevation model of the Sierra Nevada with the Style tab open" width="100%"><p align="center"><sub><b>Rasters.</b> GeoTIFF and COG, with stretch, RGB and shaded-relief styles.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/globe.webp" alt="The World Atlas drawn on a 3D globe with the View tab open" width="100%"><p align="center"><sub><b>Globe and projections.</b> A 3D globe, Equal Earth, Robinson or any EPSG code.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/tiles.webp" alt="An OpenFreeMap vector style over Paris, with the Basemap gallery listing the built-in basemaps and the web tile layer" width="100%"><p align="center"><sub><b>Web basemaps.</b> XYZ, WMS and vector tiles, and MapLibre styles.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/layout.webp" alt="A landscape A4 page layout with a map frame, title, legend, north arrow and scale bar, and the Publish tab open" width="100%"><p align="center"><sub><b>Layouts.</b> Map frames, legends, scale bars, map series and PDF export.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/plugins.webp" alt="The Plugin Manager browsing the plugin registry, listing Basemaps, Hello RustGIS, Map Explorer and Vector Toolkit with their permissions" width="100%"><p align="center"><sub><b>Plugins.</b> Install sandboxed plugins from <a href="https://plugins.rustgis.app">plugins.rustgis.app</a>.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/modelbuilder.webp" alt="ModelBuilder after a run: Cities buffered by 300 km clip the Rivers, and Countries are dissolved by continent; every node is ticked and the results are on the map" width="100%"><p align="center"><sub><b>ModelBuilder.</b> Chain tools on a node canvas and run them in one go.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/web-data.webp" alt="The Sentinel-2 Explorer in the Web Data pane over Bern: the clearest recent scenes as cards with previews, their footprints drawn on the map" width="100%"><p align="center"><sub><b>Web Data.</b> STAC, Overture Maps, NASA and open-data portals, where the map is.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/terrain.webp" alt="Mount Rainier in USGS imagery draped over elevation tiles, the map tilted 65°" width="100%"><p align="center"><sub><b>Terrain.</b> Tilt the map and drape it over elevation.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/mars-globe.webp" alt="Mars on the 3D globe, on the Viking mosaic, with Valles Marineris across the middle" width="100%"><p align="center"><sub><b>Other worlds.</b> The Moon, Mars and nine more bodies, on their own basemaps.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/extrusion.webp" alt="Countries extruded by population on a map tilted 55° and turned 20°, lit and shaded, with labels on their roofs" width="100%"><p align="center"><sub><b>Extrusion.</b> Stand features up by a field, lit and shaded.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/time-slider.webp" alt="The Time Slider under the map at 2018, showing a layer of dated events cumulatively, with a bar for each year" width="100%"><p align="center"><sub><b>Time Slider.</b> Step dated features and imagery through time.</sub></p></td>
-</tr>
-<tr>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/dark.webp" alt="RustGIS in dark mode with the View tab open over a map of Europe on the Midnight basemap" width="100%"><p align="center"><sub><b>Dark mode</b> and the View tab's effects, panes and linked views.</sub></p></td>
-<td width="50%" valign="top"><img src="https://assets.rustgis.app/images/backstage.webp" alt="The Project backstage with cards to start a blank map, the World Atlas sample, or open a project" width="100%"><p align="center"><sub><b>Projects.</b> Start blank, from the World Atlas sample, or open a project.</sub></p></td>
-</tr>
-</table>
+## Para que utilizar
 
-Every screenshot is RustGIS itself, rendered offscreen by `cargo run -p rustgis-ui-egui --example ui_shot`.
+- Preparar mapas de municípios, propriedades, rodovias, trilhas e regiões;
+- Importar pontos GPS e visualizar percursos e pontos de interesse;
+- Analisar áreas de cobertura e interseção entre regiões;
+- Estudar dados de terreno, elevação, risco e recursos ambientais;
+- Gerar mapas e arquivos geográficos para relatórios, pesquisas e aplicativos;
+- Preparar dados para projetos WMK Geo Intelligence e WMK Geo Bridge (integrações **planejadas**, ainda não implementadas).
 
-## Features
+## Executar e compilar a base
 
-| Area | Highlights |
-|---|---|
-| **Data** | GeoJSON, CSV/TSV with x/y columns in other coordinate systems or WKT geometry, Excel and OpenDocument spreadsheets, GeoRSS, LandXML, encoded polylines, Shapefile (zipped too, in the browser as well), GeoPackage, GeoParquet, FlatGeobuf, KML/KMZ (with styles), GPX, GML, MapInfo MIF/MID, OpenStreetMap PBF, TopoJSON, CityJSON, AutoCAD DXF, LiDAR point clouds (LAS, LAZ, COPC) and geotagged photos (large GeoPackage, GeoParquet and FlatGeobuf files, and Shapefiles on the desktop, are read in place), files by their web address, every vector format GDAL reads when it is installed (desktop), Esri File Geodatabases without GDAL (desktop), PostGIS, MySQL, MariaDB and SQL Server tables read live (desktop), and SQL queries and DuckDB databases through DuckDB Spatial when DuckDB is installed (desktop); PMTiles archives (by web address, or a file on the desktop) and MBTiles files; GeoJSON, CSV, GeoPackage (also as a table added to an existing file), GeoParquet, Shapefile, FlatGeobuf, KML/KMZ, GPX and WKT out (GeoPackage and FlatGeobuf not from the web app); standalone tables; reusable connections; Reload Data for linked files (desktop); geocoding (Find Place, address tables); a Data Sources pane (favourites, recent, saved services, a library) and an SQL pane (desktop); supported QGIS and GeoLibre projects and layer styles; layer and map files, styles, templates and packages |
-| **Open data** | STAC search (Planetary Computer assets), NASA Earthdata imagery and granule search (GeoTIFFs added on the desktop), Hugging Face, Overture Maps, Source Cooperative, OpenStreetMap by area, geoBoundaries, CKAN, Socrata and ArcGIS Hub portals; S3 buckets with signed connections and a bucket browser; a Data Cubes pane with a catalog of cubes for the time slider (added on the desktop) |
-| **Rasters** | GeoTIFF and cloud-optimised GeoTIFF (any pixel type, tiled or striped, compressed), ASCII grids, Zarr 2 and 3 stores (a variable at a time step, by web address, or folder on the desktop), and JPEG 2000, NetCDF, HDF, ERDAS Imagine and the other rasters GDAL reads when it is installed (desktop); reprojection by EPSG code; Stretch, RGB, Classify, Unique Values, Colormap and Shaded Relief; DRA, band combinations, brightness/contrast/gamma; raster functions, indices, change detection, classification, georeferencing; cloud-optimised GeoTIFF export (desktop); data cubes, point time-series charts (desktop), temporal summaries and trends (Sen's slope, Mann–Kendall); a spectral profile comparing a multiband raster's bands at points |
-| **Maps** | Multiple maps and layouts per project, renamed and duplicated from the Browser pane; a GPU renderer (beta) with smooth zoom and pan; tilt, rotation, terrain and a 3D globe; maps of the Moon, Mars and other celestial bodies; Web Mercator or another projection (Equal Earth, Robinson, Winkel Tripel, polar and regional presets, or a [supported](docs/user-guide/maps.md#projections) projected EPSG or ESRI code); a search box for layers, places and coordinates; UTM and MGRS readouts; an on-map right-click menu (copy the coordinate, quick buffer, viewshed and line of sight); identify pop-ups with links and pictures; bookmarks, extent history, coordinate navigation; five offline basemaps, with borders in 32 worldviews (31 downloaded when chosen) |
-| **Web services** | WMS, WMTS, WFS, WCS, OGC API Features and Tiles, and ArcGIS REST (FeatureServer, MapServer, ImageServer, VectorTileServer) from their capabilities; CSW catalogue search; sign-in to ArcGIS Online and Enterprise, basic-auth and API-key logins; WMS and WMTS time on the time slider, legends and GetFeatureInfo |
-| **Web tiles** | XYZ/TMS/WMS raster tiles, Mapbox Vector Tiles and MapLibre styles (sprites, patterns, expressions), cached and fetched in the background |
-| **Cartography** | Single symbol, unique values (also by expression), graduated colours with seven classification methods and manual breaks, proportional symbols, pie and bar diagrams; symbol size, colour, width and angle, and label text, size, colour and angle, by expression; label classes with SQL queries, straight and curved line placement, installed font families (desktop), scale ranges and annotation; stacked and dashed line strokes, hatch, marker, gradient and shapeburst fills, custom colour ramps and the matplotlib colour maps, symbol levels, reference scales and polygons without fill; masking, display filters, aggregation bins, 2.5D extrusion; graphics and dynamic text |
-| **Editing** | Create, move, rotate, scale, merge, split and explode features; vertex editing, constrained rotated boxes with paddle/numeric controls, cut polygons, reshape and trace along an edge; coincident polygon vertices in a layer moved together with Shared Vertices turned on; snapping, templates, elevation, traverse, topology rules; domains, subtypes, attribute rules, contingent values, relationships, archiving; Calculate Field with an expression language and Calculate Geometry in metric or imperial units, from the attribute table; edits saved back to GeoPackage and PostGIS tables (desktop); undo for everything in the project (undoing a save doesn't reverse what was written to the table) |
-| **Analysis** | Selection by attributes (SQL) and location; Buffer, Near, Clip, Erase, Split, Intersect, Identity, Union, Symmetrical Difference, Update, Summarize Within, Summary Statistics, Pivot Table, Tabulate Intersection, Spatial Join, Zonal Statistics, Kernel Density, A5 grids; viewshed, line of sight, IDW, ordinary kriging, shortest path, suitability modelling; tools in the background on the desktop with progress and Cancel, many on several cores, and in batches; ModelBuilder on a node canvas, scripts with command, parameter and value completion, and history copied as code; 1,000+ [GeoLibre](https://github.com/opengeos/geolibre-rust) and Whitebox raster, vector, LiDAR, hydrology and terrain tools |
-| **Data management** | Dissolve, Merge and Join Field; geometry conversions (feature to point, feature vertices to points, points along lines, polygon to line, split line at vertices, unsplit line, feature envelope to polygon, XY table to point) and minimum bounding geometry; check and repair geometry |
-| **Imagery** | Ortho and reality mapping, pixel classification (k-means, minimum distance, a trainable neural network), mensuration, hosted imagery tiles |
-| **Layouts and reports** | Page layouts with map frames, legends, scale bars, grids and map series; publication sheets and figures in one command, format panes, guides, snapping and element locks; reports with groups, statistics, charts and subreports; vector PDF and SVG, and GeoPDF with [supported map frames](docs/user-guide/layouts.md#layouts) georeferenced; presentations (HTML slideshow, PDF); notebooks (Jupyter in and out) |
-| **Sharing** | PNG export at up to 600 DPI; PDF; web map pages, OGC API Features collections, MapLibre styles, glTF and STL scenes, vector and raster PMTiles, the map view as a GeoTIFF placed on the ground (desktop), locators; the web app embedded in a page (`?embed`); project, map and mobile map packages; offline areas with sync |
-| **AI Assistant** | Ask about your data or tell the map what to do in plain language, with Anthropic, OpenAI (a key, or your ChatGPT plan by signing in on the desktop or command line), Gemini, OpenRouter, Requesty, TrustedRouter, Opper, Ollama or any OpenAI-compatible model; also `rustgis-cli ask`, and an [MCP server](docs/mcp.md) (`rustgis-cli mcp`) for Claude Code, Cursor, VS Code and other agents; skills; on the desktop, agents such as Claude Code and Codex started from the app, and external AI clients driving the open app; keys optionally remembered in the system keychain on the desktop (in the web app, unencrypted in the browser's storage) |
-| **Plugins** | Sandboxed WebAssembly [plugins](docs/plugins.md) add commands, tools and ribbon tabs; install them from [plugins.rustgis.app](https://plugins.rustgis.app) on the desktop, command line and web. Process plugins (desktop and command line) run as programs (with Python environments RustGIS makes), in the background or for the whole session; panels offer trees, dropdowns, date pickers and sliders |
-| **Python** | The [`rustgis` package](docs/python.md) on PyPI: the engine in-process, `rustgis.Map` in Jupyter and `rustgis.qt.MapWidget` in Qt applications |
-| **Interface** | Layers, Browser and Data Sources panes as tabs, command search (Ctrl+K), keyboard shortcuts, dark mode, custom themes (desktop) and an interface scale, a customizable ribbon and Quick Access Toolbar, linked side-by-side maps, a History pane of tool runs and the session log, autosave and crash recovery (desktop), Check for Updates (desktop), 22 languages |
+### Aplicativo Windows
 
-_(desktop)_ marks what the web app doesn't do; most of these also work from the command line and
-Python.
+Enquanto a personalização WMK não tem um executável próprio testado, use os [lançamentos oficiais do RustGIS](https://github.com/opengeos/RustGIS/releases) somente para conhecer o motor de origem. **Esses executáveis não contêm modificações WMK.**
 
-The [user guide](https://rustgis.app/user-guide/) covers each area in detail,
-[Comparison](https://rustgis.app/comparison/) sets RustGIS beside GeoLibre, QGIS and ArcGIS, and
-[ROADMAP.md](ROADMAP.md) lists what's next.
+### Compilar o fork no Windows
 
-## Get RustGIS
+Instale Rust **1.90 ou mais recente**, compilador C e as ferramentas descritas em [docs/installation.md](docs/installation.md). No PowerShell:
 
-- **Web app**: open **[web.rustgis.app](https://web.rustgis.app)**. The same ribbon and tools,
-  with the browser's file picker for data and projects, and downloads for Save and Export.
-- **Desktop**: download the app for Windows, macOS or Linux from
-  [downloads.rustgis.app](https://downloads.rustgis.app) or the
-  [latest release](https://github.com/opengeos/RustGIS/releases/latest) (see
-  [Installation](docs/installation.md) for the files and first-run notes).
-- **Microsoft Store**: get RustGIS from the
-  [Microsoft Store](https://apps.microsoft.com/detail/9ppjw8h561lq) on Windows 10 and 11, which
-  installs it in one click and keeps it up to date.
-- **Package managers**: `winget install OpenGeos.RustGIS`,
-  `brew install --cask rustgis` (macOS and Linux), `yay -S rustgis-bin` (AUR), or
-  `sudo dnf copr enable giswqs/rustgis && sudo dnf install rustgis` (Fedora).
-- **From source**: `cargo run --release -p rustgis` (Rust 1.90 or later).
-
-## Quick start
-
-```sh
-cargo run --release -p rustgis                       # the desktop app with the World Atlas sample
-cargo run --release -p rustgis -- data.geojson       # open data (or a .rgis project)
+```powershell
+git clone https://github.com/WalneyNF/WMK-TerraStudio.git
+cd WMK-TerraStudio
+cargo build --release --locked -p rustgis -p rustgis-cli
 ```
 
-Command line: every ribbon action is a command with an id.
+Essa compilação produz a base atual do fork. O processo de build Windows x64 personalizado será entregue em uma fase posterior, após a revisão da marca interna.
 
-```sh
-rustgis-cli commands                                 # all command ids and parameters
-rustgis-cli render countries.geojson map.png --basemap ocean
-rustgis-cli run --sample \
-  --cmd 'gp.run={"tool":"countPoints","params":{"polygons":"Countries","points":"Cities"}}' \
-  --cmd 'layer.symbology={"layer":"Countries_Summarize","type":"graduated","field":"point_count"}' \
-  --cmd 'share.exportMap={"path":"out.png","dpi":192}' --save atlas.rgis
-rustgis-cli ask --sample "Which 5 countries have the largest GDP?"
-claude mcp add rustgis -- rustgis-cli mcp --sample   # RustGIS as an MCP server for AI agents
-```
+### Aplicativo web e Python
 
-See [Command Line](docs/cli.md) for more.
+A versão pública de demonstração [web.rustgis.app](https://web.rustgis.app) pertence ao projeto original. Para automações Python, leia [docs/python.md](docs/python.md). Para agentes, leia [docs/mcp.md](docs/mcp.md).
 
-Python: the same engine and commands in-process (`pip install rustgis`), and the app itself in a
-Jupyter notebook.
+## Idioma
 
-```python
-import rustgis
-s = rustgis.Session(sample=True)
-s.run("gp.run", tool="buffer", params={"input": "Cities", "distance": 100})
-s.to_png("map.png")
-gdf = s.layer("Cities_Buffer").to_geopandas()
-```
+O RustGIS possui um catálogo de interface em português no arquivo [`crates/ui-egui/src/i18n/pt.tsv`](crates/ui-egui/src/i18n/pt.tsv). A **revisão sistemática para pt-BR está prevista para a próxima etapa**; não anunciamos uma tradução WMK concluída nesta fase. O manual e esta apresentação já estão em português brasileiro.
 
-See [Python](docs/python.md) and the [getting-started notebook](apps/rustgis-python/examples/getting-started.ipynb)
-([open in Colab](https://colab.research.google.com/github/opengeos/RustGIS/blob/main/apps/rustgis-python/examples/getting-started.ipynb)).
+## Organização dos manuais
 
-## Architecture
+Todos os futuros guias WMK serão organizados em [`manuais/`](manuais/README.md), seguindo o padrão:
 
-Layered crates, each depending only on the ones below it:
+- **Iniciante:** instalação, primeiros passos, interface e tutoriais simples;
+- **Intermediário:** camadas, sistemas de coordenadas, análise e relatórios;
+- **Avançado:** arquitetura Rust, Python, CLI, MCP, plugins e integrações;
+- **Desenvolvedores:** compilação, testes, segurança, licenças e manutenção.
 
-| Layer | Crate | Job |
-|---|---|---|
-| L0 | `rustgis-geom` | coordinates, extents, Web Mercator, geodesic distance/area, scale |
-| L1 | `rustgis-data` | features and typed attributes; GeoJSON, CSV, Shapefile, KML, GPX and more; GeoPackage, GeoParquet, FlatGeobuf, LiDAR, PostGIS and MySQL providers; GDAL formats and DuckDB queries through their programs; SQL where clauses; rasters (GeoTIFF, ASCII grid, Zarr) and their coordinate systems |
-| L2 | `rustgis-map`, `rustgis-analysis` | layers, symbology, labeling, camera, basemaps; geoprocessing (on `geo`) |
-| L2 | `rustgis-tiles` | web map tiles: XYZ/TMS/WMS, Mapbox Vector Tiles, PMTiles and MBTiles archives, MapLibre styles, the tile cache |
-| L3 | `rustgis-render` | tiny-skia renderer, label placement, PNG export, fonts |
-| L3 | `rustgis-plugins` | sandboxed WebAssembly plugins and the plugin registry |
-| L3 | `rustgis-geolibre` | the GeoLibre tool suite as geoprocessing tools |
-| L4 | `rustgis-engine` | session, undo, command registry, sample project |
-| L5 | `rustgis-assistant` | the AI Assistant: a chat agent that acts through commands |
-| L6 | `rustgis-ui-egui` | the ribbon front end (swappable) |
-| apps | `rustgis`, `rustgis-cli`, `rustgis-web`, `rustgis-python` | desktop, command line, browser (WebAssembly), the `rustgis` Python package |
+## Evolução do WMK TerraStudio
 
-`cargo xtask ci` runs formatting, clippy, the tests and the layering check. Contributor and
-agent notes: [AGENTS.md](AGENTS.md).
+1. **Etapa 1 — documentação e identidade no GitHub:** README pt-BR, marca visual e estrutura de manuais.
+2. **Etapa 2 — tradução de interface:** revisão do catálogo português e escolha pt-BR no aplicativo.
+3. **Etapa 3 — identidade interna:** nome nas janelas, informações de produto, ícones e instaladores sem quebrar identificadores e formatos.
+4. **Etapa 4 — testes Windows:** build pelo GitHub Actions, ZIP portátil, testes de execução e publicação de release.
+5. **Etapa 5 — ferramentas WMK:** integração geográfica com os demais projetos, mapas de exemplo e novas funcionalidades.
 
-## Sponsor
+Acompanhe o [roadmap WMK](manuais/ROADMAP-WMK.md) e, para a evolução do projeto original, [ROADMAP.md](ROADMAP.md).
 
-RustGIS is free and open source, and stays that way. If it is useful to you or your team, sponsorship is the most direct way to keep development, hosting and cross-platform distribution going.
+## Segurança, licenciamento e colaboração
 
-- [**GitHub Sponsors**](https://github.com/sponsors/giswqs): monthly or one-time, billed through your GitHub account.
-- [**Buy Me a Coffee**](https://buymeacoffee.com/giswqs): a quick one-off contribution, no account required.
+- Não publique senhas ou chaves de APIs dentro do código, dos logs ou dos projetos.
+- Habilite plugins de processo e acesso completo MCP somente quando confiar nos componentes.
+- Preserve os avisos legais do RustGIS e das dependências. O fork conserva a licença Apache-2.0 do código original.
+- Evite alterar formatos de projeto, IDs de comandos e APIs públicas apenas para mudar a marca.
 
-See the [Become a Sponsor](https://rustgis.app/sponsor/) page for what sponsorship supports and for other, free ways to help.
+**Personalização WMK:** Walney Moreira Klein — walneyk@hotmail.com.
 
-## Citation
-
-If you use RustGIS in your work, please cite it. RustGIS is archived on [Zenodo](https://zenodo.org/), which mints a DOI for every release. The concept DOI below always resolves to the latest version.
-
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23633281.svg)](https://doi.org/10.5281/zenodo.23633281)
-
-> Wu, Q., Rincón Albarracín, J. G., Filho, E., Hofbauer, D., Fitzgerald, M., & Strebel, D. (2026). RustGIS: A fast, free and open-source GIS in pure Rust for mapping, analyzing and sharing geospatial data. Zenodo. <https://doi.org/10.5281/zenodo.23633281>
-
-You can also use GitHub's **"Cite this repository"** button (which reads [`CITATION.cff`](CITATION.cff)) to copy a ready-made APA or BibTeX entry. See the [How to Cite](https://rustgis.app/citation/) page for more formats.
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=opengeos%2Frustgis&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=opengeos/rustgis&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=opengeos/rustgis&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=opengeos/rustgis&type=date&legend=top-left" />
- </picture>
-</a>
-
-## Acknowledgements
-
-RustGIS builds on the work of many projects and their authors: [QGIS](https://qgis.org), ArcGIS
-Pro and [GDAL](https://gdal.org), the GIS it is measured against; [MapLibre](https://maplibre.org)
-and [PROJ](https://proj.org); the GeoLibre tool suite, after John Lindsay's
-[WhiteboxTools](https://www.whiteboxgeo.com); [OpenFreeMap](https://openfreemap.org) for vector
-basemaps; [Natural Earth](https://www.naturalearthdata.com),
-[OpenStreetMap](https://www.openstreetmap.org), [Overture Maps](https://overturemaps.org) and the
-EPSG dataset; and the Rust crates it is made of, among them [egui](https://github.com/emilk/egui),
-[wgpu](https://wgpu.rs), [tiny-skia](https://github.com/linebender/tiny-skia),
-[geo](https://github.com/georust/geo), [terrio-crs](https://github.com/opengeos/terrio),
-[tiff](https://github.com/image-rs/image-tiff), Apache Arrow and Parquet,
-[rusqlite](https://github.com/rusqlite/rusqlite) and [wasmi](https://github.com/wasmi-labs/wasmi).
-See the [acknowledgements](https://rustgis.app/acknowledgements/) for the full list, and
-[ATTRIBUTION.md](ATTRIBUTION.md) for every asset's source and licence.
-
-## Disclaimer
-
-RustGIS is primarily built with [Claude Opus 5.5](https://www.anthropic.com/claude), an AI model by
-Anthropic, working under human direction and review. Its results are tested, but check them for
-your own use, and please [report](https://github.com/opengeos/RustGIS/issues) anything that looks
-wrong.
-
-## License and credits
-
-Licensed under the [Apache License 2.0](LICENSE). Sample data from
-[Natural Earth](https://www.naturalearthdata.com/) (public domain).
+**Motor original:** [opengeos/RustGIS](https://github.com/opengeos/RustGIS) e seus colaboradores.
