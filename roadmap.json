@@ -148,6 +148,13 @@
           "state": "implemented",
           "evidence": "modulos/planet-watch/exportar_geojson.py; modulos/planet-watch/tests/test_export.py",
           "note": "A importação gráfica do arquivo no TerraStudio ainda requer teste Windows"
+        },
+        {
+          "id": "PLANET-06",
+          "name": "INICIAR.cmd com PHP e API Python, proxy local e verificações",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/INICIAR.cmd; modulos/planet-watch/router.php",
+          "note": "Execução em Windows com XAMPP ainda depende de teste manual"
         }
       ]
     },
@@ -300,6 +307,13 @@
           "id": "VJ-08",
           "name": "Modo pilotagem com física, instrumentos de sistemas e modelos detalhados",
           "state": "planned"
+        },
+        {
+          "id": "VJ-09",
+          "name": "INICIAR.cmd com servidor PHP e abertura automática do navegador",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/INICIAR.cmd",
+          "note": "Execução em Windows com XAMPP ainda depende de teste manual"
         }
       ]
     }

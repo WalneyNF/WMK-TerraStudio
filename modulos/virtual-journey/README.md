@@ -12,6 +12,12 @@
 - Passeio demonstrativo animado com cálculo geodésico simples e trilha, pausável.
 - Simulação explicitamente rotulada: **sem ADS-B/telemetria real**. Representações externas são primitivas 3D geométricas, não modelos detalhados de aeronaves.
 
+## Um clique no Windows com PHP ou XAMPP
+
+Clique duas vezes em **`INICIAR.cmd`** na pasta deste módulo. O script procura o PHP no PATH e nas instalações comuns do XAMPP, inicia **PHP na porta 8791**, verifica a resposta e abre **http://127.0.0.1:8791** automaticamente.
+
+**Requisitos:** PHP 8/XAMPP e internet para CesiumJS e mapas. Não é necessário Apache nem Python neste módulo. Feche a janela do PHP para parar. O arquivo `INICIAR.cmd` não altera configurações globais do XAMPP.
+
 ## Como executar no Windows
 
 Na raiz do repositório:

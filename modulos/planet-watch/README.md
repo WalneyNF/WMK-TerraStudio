@@ -2,6 +2,16 @@
 
 Este é o primeiro módulo operacional separado do TerraStudio, desenvolvido em Python 3.10+ (biblioteca padrão) e JavaScript/Leaflet. Pode funcionar ao lado do RustGIS sem alterar nem quebrar seu motor.
 
+## Um clique no Windows (PHP/XAMPP + Python)
+
+Clique duas vezes em **`INICIAR.cmd`** na pasta deste módulo.
+
+O arquivo detecta `php.exe` no PATH ou no XAMPP (C:/D:/E:/xampp), inicia a **API Python na porta 8788** e publica a interface com **PHP na porta 8789** através do roteador local `router.php`. Após verificar os servidores, abre automaticamente **http://127.0.0.1:8789**.
+
+**Requisitos:** PHP 8 (ou XAMPP), Python 3 e internet. Não é necessário iniciar Apache. O PHP não substitui o Python: o arquivo `router.php` é proxy apenas das rotas públicas permitidas e não expõe o código Python como arquivo estático. Feche as duas janelas de servidores para encerrar a execução. Não expor as portas na rede externa.
+
+**Alternativa sem PHP:** execute `py -3 server.py` e use http://127.0.0.1:8788.
+
 ## Executar no Windows
 
 Abrir PowerShell na raiz do projeto:
