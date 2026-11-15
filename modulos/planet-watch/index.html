@@ -1,0 +1,26 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WMK TerraStudio — Planet Watch</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{color-scheme:dark;font:14px system-ui;background:#071b21;color:#eafff4}*{box-sizing:border-box}
+body{margin:0}header{padding:15px;background:#0b3033;border-bottom:1px solid #235a55}h1{margin:0;font-size:22px;color:#66f4b4}
+main{display:grid;grid-template-columns:300px 1fr;height:calc(100vh - 65px)}aside{overflow:auto;background:#08252d;padding:16px}
+#map{height:100%;width:100%;background:#153f46}section{border:1px solid #29645f;background:#12333d;border-radius:9px;padding:12px;margin-bottom:14px}
+h2{font-size:16px;color:#8defc3}label{display:block;margin:12px 0}button{background:#076a62;border:1px solid #47aa98;color:white;padding:9px 14px;border-radius:7px;cursor:pointer}
+p,footer{color:#aecac5;line-height:1.5;font-size:12px}#status,#weather,#details{white-space:pre-wrap;word-break:break-word}
+a{color:#73e8cc}footer{padding:12px 0}@media(max-width:750px){main{display:flex;flex-direction:column;height:auto}aside{height:42vh}#map{height:58vh}}
+</style></head><body><header><h1>🌐 WMK TerraStudio · Planet Watch</h1></header>
+<main><aside>
+<section><h2>Observação mundial</h2><label><input type="checkbox" id="earthquakes" checked> Terremotos USGS</label>
+<label><input type="checkbox" id="events" checked> Eventos NASA EONET</label>
+<button id="refresh">Atualizar camadas</button><p id="status">Carregando…</p></section>
+<section><h2>Clima Open-Meteo</h2><p>Clique no mapa para consultar o tempo naquele local.</p><div id="weather">Aguardando seleção.</div></section>
+<section><h2>Informações</h2><div id="details">Clique em um marcador para ver os detalhes.</div></section>
+<section><h2>Outros módulos WMK</h2>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/WalneyNF/WMK-Geo-Intelligence">Geo Intelligence — aviação, navios e satélites</a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/WalneyNF/WMK-GPS-Tracker">GPS Tracker — Traccar</a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/WalneyNF/WMK-Geo-Bridge">Geo Bridge — conectores GPS</a></p>
+<p>Integrações automáticas ainda em desenvolvimento.</p></section>
+<footer>WMK — Walney Moreira Klein — walneyk@hotmail.com<br>Motor GIS original: RustGIS, opengeos (Apache-2.0).</footer>
+</aside><div id="map"></div></main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="/app.js"></script></body></html>

@@ -1,0 +1,46 @@
+{
+  "project": "WMK TerraStudio",
+  "version": "0.1.0",
+  "modules": [
+    {
+      "id": "planet-watch",
+      "status": "prototype",
+      "features": [
+        "usgs",
+        "nasa-eonet",
+        "open-meteo"
+      ]
+    },
+    {
+      "id": "geo-intelligence",
+      "status": "external",
+      "repo": "WalneyNF/WMK-Geo-Intelligence",
+      "features": [
+        "adsb",
+        "ais",
+        "cesium",
+        "satellites",
+        "mcp"
+      ]
+    },
+    {
+      "id": "gps-tracker",
+      "status": "external",
+      "repo": "WalneyNF/WMK-GPS-Tracker"
+    },
+    {
+      "id": "geo-bridge",
+      "status": "external",
+      "repo": "WalneyNF/WMK-Geo-Bridge"
+    },
+    {
+      "id": "gis",
+      "status": "upstream-existing",
+      "features": [
+        "rustgis-engine",
+        "mcp",
+        "geoprocessing"
+      ]
+    }
+  ]
+}
