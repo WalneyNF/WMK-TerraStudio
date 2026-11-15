@@ -80,6 +80,23 @@ Todos os futuros guias WMK serão organizados em [`manuais/`](manuais/README.md)
 - **Avançado:** arquitetura Rust, Python, CLI, MCP, plugins e integrações;
 - **Desenvolvedores:** compilação, testes, segurança, licenças e manutenção.
 
+## 🌎 Planet Watch — primeiro módulo de observação mundial
+
+O [WMK Planet Watch](modulos/planet-watch/README.md) é um laboratório independente em Python/HTML/JavaScript, com mapa interativo e três conectores públicos: **terremotos USGS, eventos naturais NASA EONET e meteorologia Open-Meteo**. Possui cache local, mensagens de erro e testes unitários automatizados.
+
+Para iniciar com Python 3.10 ou superior, na raiz do repositório:
+
+```powershell
+cd modulos/planet-watch
+py -3 server.py
+```
+
+Acesse **http://127.0.0.1:8788**. Veja o [catálogo de módulos WMK](modulos/catalogo.json).
+
+**Escopo atual:** o módulo não incorpora ainda os fluxos ADS-B, AIS, satélites ou Traccar dos outros projetos WMK. O GPS permanece bloqueado até existir autorização de leitura no Bridge. O servidor é limitado a 127.0.0.1 e não deve ser exposto publicamente.
+
+**Código-base e atribuições:** RustGIS / opengeos e seus colaboradores. **Personalização WMK:** Walney Moreira Klein — walneyk@hotmail.com.
+
 ## Evolução do WMK TerraStudio
 
 1. **Etapa 1 — documentação e identidade no GitHub:** README pt-BR, marca visual e estrutura de manuais.
