@@ -15,11 +15,40 @@
 
 > **Origem e atribuições:** O WMK TerraStudio é um fork independente de [RustGIS, do projeto opengeos](https://github.com/opengeos/RustGIS). Toda a base original permanece creditada aos respectivos autores e colaboradores, sob a licença **Apache-2.0**. A identidade WMK e a documentação em português são personalizações do fork. Este projeto **não é uma distribuição oficial** do RustGIS. Consulte [LICENSE](LICENSE), [ATTRIBUTION.md](ATTRIBUTION.md), [THIRD-PARTY-LICENSES.txt](THIRD-PARTY-LICENSES.txt) e [NOTICE de atribuições WMK](manuais/ATRIBUICOES.md).
 
+## 📦 ZIPs de módulos para baixar sem login
+
+- **[WMK Planet Watch (ZIP)](downloads/WMK-Planet-Watch-v0.1.zip)** — dados públicos USGS/NASA/Open-Meteo. Extraia, instale PHP 8/XAMPP e Python 3, execute `INICIAR.cmd`.
+- **[WMK Virtual Journey (ZIP)](downloads/WMK-Virtual-Journey-v0.1.zip)** — viagens 3D, simulador e busca limitada de aviões. Extraia, instale PHP 8/XAMPP, execute `INICIAR.cmd`.
+
+Ambos os ZIPs estão armazenados no repositório para download direto. A publicação do EXE em Releases está temporariamente bloqueada por **HTTP 403 (permissão do GitHub Actions)**; consulte a seção abaixo e não confunda com um Release já publicado.
+
+## ⬇️ Download público — Windows e módulos WMK
+
+**A publicação em Releases ainda depende de habilitar permissão de escrita do GitHub Actions.** Os ZIPs dos módulos já podem ser baixados diretamente acima.
+
+Pacotes de prévia separados, acessíveis sem a página de artefatos do GitHub Actions:
+
+| Arquivo | Requisitos | Como começar |
+| --- | --- | --- |
+| `WMK-TerraStudio-Windows-x64-PREVIEW.zip` | Windows 64 bits | Extrair e executar `rustgis.exe` |
+| `WMK-Planet-Watch-v0.1.zip` | PHP 8/XAMPP + Python 3 | Extrair, executar `INICIAR.cmd` |
+| `WMK-Virtual-Journey-v0.1.zip` | PHP 8/XAMPP + navegador WebGL | Extrair, executar `INICIAR.cmd` |
+
+A versão compilada publicada nesta prévia é **anterior à incorporação do ícone WMK oficial**; não confundir com a compilação mais recente, ainda em validação. Os ZIPs incluem `SHA256SUMS.txt` para conferência. A execução em Windows deve ser testada com o antivírus ativo.
+
+O workflow [Publicar ZIPs para download](.github/workflows/wmk-public-download.yml) empacota novamente os módulos e publica os arquivos como ativos de uma Release.
+
 ## Apresentação
 
 O WMK TerraStudio é uma proposta de ambiente profissional para **mapas, SIG (Sistema de Informações Geográficas), análise espacial, imagens de satélite e dados de localização**, construída sobre a base tecnológica do RustGIS. O motor original já oferece aplicativos desktop e web, biblioteca Python, linha de comando, integração por MCP e plugins.
 
-A personalização **WMK será feita por etapas**. Nesta primeira etapa são alterados apenas a documentação e os recursos visuais do repositório. **O nome interno, o ícone do executável e o aplicativo compilado continuam RustGIS** até sua migração e validação. Não confunda esta etapa documental com uma versão pronta para instalar.
+A personalização **WMK será feita por etapas**. Nesta primeira etapa são alterados apenas a documentação e os recursos visuais do repositório. **A janela e os metadados Windows já usam WMK TerraStudio; a compilação Windows de teste passou após corrigir a tradução.** O motor ainda preserva identificadores RustGIS para compatibilidade. A inclusão do ícone original e o nome portátil `WMK-TerraStudio.exe` estão em validação no workflow. Não confunda esta etapa documental com uma versão pronta para instalar.
+
+## Download do Windows (build verificado)
+
+Um pacote **Windows x64** com a tradução pt-BR foi compilado com sucesso no GitHub Actions. [Baixe o artefato experimental](https://github.com/WalneyNF/WMK-TerraStudio/actions/runs/43685162247/artifacts/14150578532) (pode exigir login). Essa compilação anterior à integração da logo oficial ainda tem nome de arquivo interno `rustgis.exe`.
+
+**Novo pacote com logo WMK e `WMK-TerraStudio.exe`:** acompanhe o workflow [Windows x64](https://github.com/WalneyNF/WMK-TerraStudio/actions/workflows/wmk-windows.yml). Só será disponibilizado como versão final depois que os testes do ícone e a compilação mais recente terminarem.
 
 ## Recursos da base RustGIS
 

@@ -34,11 +34,12 @@
         {
           "id": "BRAND-03",
           "name": "Inserir o PNG original da logo aprovada no GitHub e ícone nativo",
-          "state": "blocked",
-          "note": "A arte aprovada está na conversa, mas o arquivo binário ainda precisa ser incorporado no repositório; não substituir por desenho diferente",
+          "state": "implemented",
+          "note": "PNG aprovado incorporado em resolução otimizada de 64 px; aguardando validação do novo EXE e substituição por recurso de maior resolução",
           "dependsOn": [
             "BRAND-02"
-          ]
+          ],
+          "evidence": "assets/wmk-terrastudio-icon.png; crates/render/src/logo.rs"
         },
         {
           "id": "BRAND-04",
@@ -93,7 +94,8 @@
         {
           "id": "WIN-02",
           "name": "GitHub Actions concluir cargo test e cargo build",
-          "state": "testing"
+          "state": "done",
+          "evidence": "https://github.com/WalneyNF/WMK-TerraStudio/actions/runs/43685162247"
         },
         {
           "id": "WIN-03",
@@ -110,6 +112,20 @@
           "dependsOn": [
             "WIN-03"
           ]
+        },
+        {
+          "id": "WIN-05",
+          "name": "Distribuir WMK-TerraStudio.exe com ícone oficial e ZIP portátil",
+          "state": "implemented",
+          "evidence": ".github/workflows/wmk-windows.yml; assets/wmk-terrastudio-icon.png",
+          "note": "Aguardando resultado da nova compilação"
+        },
+        {
+          "id": "WIN-06",
+          "name": "Publicar prévia pública do executável já compilado e módulos ZIP individuais em GitHub Releases",
+          "state": "implemented",
+          "evidence": ".github/workflows/wmk-public-download.yml",
+          "note": "O Release ainda depende da execução e validação do workflow; o pacote EXE desta prévia é anterior à logo oficial"
         }
       ]
     },
@@ -148,6 +164,13 @@
           "state": "implemented",
           "evidence": "modulos/planet-watch/exportar_geojson.py; modulos/planet-watch/tests/test_export.py",
           "note": "A importação gráfica do arquivo no TerraStudio ainda requer teste Windows"
+        },
+        {
+          "id": "PLANET-06",
+          "name": "INICIAR.cmd com PHP e API Python, proxy local e verificações",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/INICIAR.cmd; modulos/planet-watch/router.php",
+          "note": "Execução em Windows com XAMPP ainda depende de teste manual"
         }
       ]
     },
@@ -242,6 +265,91 @@
           "id": "MCP-04",
           "name": "Ollama, OpenAI, Gemini, Groq via provedor compatível: testes e custos",
           "state": "planned"
+        }
+      ]
+    },
+    {
+      "id": "virtual-journey",
+      "name": "Virtual Journey — cabines e viagens",
+      "category": "Experiência 3D",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "VJ-01",
+          "name": "Globo Cesium, 5 câmeras e movimento demonstrativo",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/app.js"
+        },
+        {
+          "id": "VJ-02",
+          "name": "Layouts de instrumentos distintos para A320, B737, C172 e H125",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/index.html; modulos/virtual-journey/models.js",
+          "note": "Layouts didáticos, não réplicas fidedignas dos cockpits"
+        },
+        {
+          "id": "VJ-03",
+          "name": "Validação matemática do movimento, modelos e rótulos de telemetria",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/tests/flight.test.js"
+        },
+        {
+          "id": "VJ-04",
+          "name": "Homologar exibição 3D e desempenho no Windows 10",
+          "state": "testing"
+        },
+        {
+          "id": "VJ-05",
+          "name": "Conectar dados ADS-B/OpenSky do WMK Geo Intelligence",
+          "state": "planned",
+          "dependsOn": [
+            "VJ-04"
+          ]
+        },
+        {
+          "id": "VJ-06",
+          "name": "Cabines 3D específicas realistas por modelo com fontes licenciadas",
+          "state": "planned",
+          "dependsOn": [
+            "VJ-05"
+          ]
+        },
+        {
+          "id": "VJ-07",
+          "name": "Adicionar helicópteros, navios, trens, carros e webcams públicas",
+          "state": "planned"
+        },
+        {
+          "id": "VJ-08",
+          "name": "Modo pilotagem com física, instrumentos de sistemas e modelos detalhados",
+          "state": "planned"
+        },
+        {
+          "id": "VJ-09",
+          "name": "INICIAR.cmd com servidor PHP e abertura automática do navegador",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/INICIAR.cmd",
+          "note": "Execução em Windows com XAMPP ainda depende de teste manual"
+        },
+        {
+          "id": "VJ-10",
+          "name": "Consulta regional de aeronaves ADS-B.lol e acompanhamento por posição reportada",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/api/flights.php; modulos/virtual-journey/app.js",
+          "note": "Busca manual com cache e controle de cotas; projeção limitada a 20 segundos; teste visual pendente"
+        },
+        {
+          "id": "VJ-11",
+          "name": "Painel compacto para melhor visualização da viagem",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/style.css"
+        },
+        {
+          "id": "VJ-12",
+          "name": "Corrigir erro 429 local com aviso de espera e oferecer aeronaves fictícias para testes",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/api/flights.php; modulos/virtual-journey/api/demo.php; modulos/virtual-journey/app.js",
+          "note": "Aguardar CI; consulta real ainda depende da cota e cobertura do provedor"
         }
       ]
     }
