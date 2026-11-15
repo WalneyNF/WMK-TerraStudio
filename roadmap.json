@@ -129,7 +129,7 @@
           "id": "PLANET-02",
           "name": "Contrato público GeoJSON reutilizável por apps WMK",
           "state": "implemented",
-          "evidence": "modulos/planet-watch/server.py"
+          "evidence": "modulos/planet-watch/server.py; modulos/planet-watch/exportar_geojson.py"
         },
         {
           "id": "PLANET-03",
@@ -141,6 +141,13 @@
           "id": "PLANET-04",
           "name": "Conector INPE, webcams e qualidade do ar",
           "state": "planned"
+        },
+        {
+          "id": "PLANET-05",
+          "name": "Exportador GeoJSON USGS/NASA com testes sem rede",
+          "state": "implemented",
+          "evidence": "modulos/planet-watch/exportar_geojson.py; modulos/planet-watch/tests/test_export.py",
+          "note": "A importação gráfica do arquivo no TerraStudio ainda requer teste Windows"
         }
       ]
     },
