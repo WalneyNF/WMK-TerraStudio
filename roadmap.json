@@ -244,6 +244,64 @@
           "state": "planned"
         }
       ]
+    },
+    {
+      "id": "virtual-journey",
+      "name": "Virtual Journey — cabines e viagens",
+      "category": "Experiência 3D",
+      "state": "testing",
+      "tasks": [
+        {
+          "id": "VJ-01",
+          "name": "Globo Cesium, 5 câmeras e movimento demonstrativo",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/app.js"
+        },
+        {
+          "id": "VJ-02",
+          "name": "Layouts de instrumentos distintos para A320, B737, C172 e H125",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/index.html; modulos/virtual-journey/models.js",
+          "note": "Layouts didáticos, não réplicas fidedignas dos cockpits"
+        },
+        {
+          "id": "VJ-03",
+          "name": "Validação matemática do movimento, modelos e rótulos de telemetria",
+          "state": "implemented",
+          "evidence": "modulos/virtual-journey/tests/flight.test.js"
+        },
+        {
+          "id": "VJ-04",
+          "name": "Homologar exibição 3D e desempenho no Windows 10",
+          "state": "testing"
+        },
+        {
+          "id": "VJ-05",
+          "name": "Conectar dados ADS-B/OpenSky do WMK Geo Intelligence",
+          "state": "planned",
+          "dependsOn": [
+            "VJ-04"
+          ]
+        },
+        {
+          "id": "VJ-06",
+          "name": "Cabines 3D específicas realistas por modelo com fontes licenciadas",
+          "state": "planned",
+          "dependsOn": [
+            "VJ-05"
+          ]
+        },
+        {
+          "id": "VJ-07",
+          "name": "Adicionar helicópteros, navios, trens, carros e webcams públicas",
+          "state": "planned"
+        },
+        {
+          "id": "VJ-08",
+          "name": "Modo pilotagem com física, instrumentos de sistemas e modelos detalhados",
+          "state": "planned"
+        }
+      ]
     }
   ]
 }

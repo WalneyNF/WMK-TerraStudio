@@ -1,0 +1,20 @@
+name: WMK Virtual Journey - Testes
+on:
+  pull_request:
+    paths: ['modulos/virtual-journey/**', '.github/workflows/wmk-virtual-journey.yml']
+  push:
+    paths: ['modulos/virtual-journey/**', '.github/workflows/wmk-virtual-journey.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Testar física demonstrativa e biblioteca de modelos
+        working-directory: modulos/virtual-journey
+        run: npm test
